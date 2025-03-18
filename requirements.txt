@@ -1,3 +1,1 @@
-playwright==1.51.0
-pytesseract==0.3.10
-Pillow==10.2.0  # For image processing 
+playwright==1.51.0 

@@ -4,9 +4,6 @@ import os
 import random
 from datetime import datetime
 import logging
-import pytesseract
-from PIL import Image
-import re
 
 # Set up logging
 logging.basicConfig(
@@ -281,60 +278,6 @@ class MaxiSysScraper:
             logger.error(f"Error detecting calibration type: {e}")
             return None
 
-    async def get_csc_model(self, page):
-        """Extract CSC model number using OCR."""
-        try:
-            logger.info("Attempting to extract CSC model number...")
-            
-            # Take a screenshot of the calibration diagram area
-            # We'll use a more specific selector to target the area with the CSC model info
-            diagram_selector = "img[src*='calibration'], img[alt*='calibration']"
-            
-            try:
-                diagram_element = await page.wait_for_selector(diagram_selector, timeout=5000)
-                if not diagram_element:
-                    raise Exception("Could not find calibration diagram")
-                
-                # Take a screenshot of just this element
-                screenshot_path = os.path.join(self.debug_dir, "csc_diagram.png")
-                await diagram_element.screenshot(path=screenshot_path)
-                
-                # Use OCR to extract text from the image
-                image = Image.open(screenshot_path)
-                text = pytesseract.image_to_string(image)
-                
-                # Look for CSC model patterns in the text
-                csc_pattern = r'(?:AUTEL-)?CSC0[0-9]{3}(?:/[0-9]{2})?'
-                matches = re.findall(csc_pattern, text)
-                
-                if matches:
-                    csc_model = matches[0]
-                    logger.info(f"Found CSC model: {csc_model}")
-                    return csc_model
-                else:
-                    # If we didn't find it in the first pass, try with different preprocessing
-                    logger.info("No CSC model found in first pass, trying alternative OCR approach...")
-                    # Convert image to grayscale for better OCR
-                    gray_image = image.convert('L')
-                    text = pytesseract.image_to_string(gray_image)
-                    matches = re.findall(csc_pattern, text)
-                    
-                    if matches:
-                        csc_model = matches[0]
-                        logger.info(f"Found CSC model in second pass: {csc_model}")
-                        return csc_model
-                    
-                    logger.error("Could not find CSC model number in image")
-                    return None
-                
-            except Exception as e:
-                logger.error(f"Error capturing diagram screenshot: {e}")
-                return None
-            
-        except Exception as e:
-            logger.error(f"Error in CSC model extraction: {e}")
-            return None
-
     async def scrape(self):
         """Main scraping function."""
         try:
@@ -380,13 +323,6 @@ class MaxiSysScraper:
                     logger.info(f"Calibration Type: {calibration_type}")
                 else:
                     logger.error("Failed to determine calibration type")
-                
-                # Get CSC model number
-                csc_model = await self.get_csc_model(self.page)
-                if csc_model:
-                    logger.info(f"CSC Model: {csc_model}")
-                else:
-                    logger.error("Failed to determine CSC model")
                 
                 # Capture final state
                 await self.capture_debug_info(self.page, "final_state")
