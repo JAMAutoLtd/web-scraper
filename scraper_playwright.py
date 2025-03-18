@@ -4,6 +4,12 @@ import os
 import random
 from datetime import datetime
 import logging
+import pytesseract
+from PIL import Image
+import re
+
+# Set Tesseract executable path
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # Set up logging
 logging.basicConfig(
@@ -278,6 +284,119 @@ class MaxiSysScraper:
             logger.error(f"Error detecting calibration type: {e}")
             return None
 
+    async def get_csc_model(self, page):
+        """Extract CSC model number from the calibration diagram using OCR."""
+        try:
+            # Log all images on the page for debugging
+            images = await page.evaluate("""() => {
+                return Array.from(document.querySelectorAll('img')).map(img => ({
+                    src: img.src,
+                    alt: img.alt,
+                    class: img.className,
+                    id: img.id,
+                    isVisible: img.offsetParent !== null
+                }));
+            }""")
+            logger.info("Found images on page:")
+            for img in images:
+                logger.info(f"Image: src={img['src']}, alt={img['alt']}, class={img['class']}, visible={img['isVisible']}")
+
+            # Try multiple selectors to find the calibration diagram
+            selectors = [
+                '.swiper-slide img[src*="download1.auteltech.net"]',  # Target the specific domain
+                '.swiper-container img',  # Any image in the swiper container
+                '.swiper-slide:has-text("Static Calibration") img',  # Image in slide with Static Calibration text
+                '//div[contains(@class, "swiper-slide")]//img',  # XPath for any image in swiper slides
+                'img[src*="adas-filter/image"]'  # Images from the adas-filter directory
+            ]
+
+            diagram = None
+            for selector in selectors:
+                try:
+                    logger.info(f"Trying selector: {selector}")
+                    # Use waitForSelector instead of locator for better error handling
+                    element = await page.wait_for_selector(selector, timeout=5000)
+                    if element:
+                        # Verify this is the correct image
+                        src = await element.get_attribute('src')
+                        logger.info(f"Found image with src: {src}")
+                        if 'adas-filter/image' in src:
+                            logger.info(f"Found element with selector: {selector}")
+                            diagram = element
+                            break
+                except Exception as e:
+                    logger.debug(f"Selector {selector} failed: {e}")
+                    continue
+
+            if not diagram:
+                # Try an alternative approach - look for the text directly
+                logger.info("Could not find diagram, trying to find text directly...")
+                text_selectors = [
+                    '.swiper-slide:has-text("CSC")',
+                    'text="AUTEL-CSC0800"',
+                    'text="AUTEL-CSC0802/01"',
+                    '.swiper-slide .header:has-text("Static Calibration")'
+                ]
+                
+                for selector in text_selectors:
+                    try:
+                        element = await page.wait_for_selector(selector, timeout=5000)
+                        if element:
+                            text = await element.text_content()
+                            logger.info(f"Found text content: {text}")
+                            # Look for CSC model patterns
+                            csc_pattern = r'(?:AUTEL-)?CSC0[80][0-9]{2}(?:/\d+)?'
+                            matches = re.findall(csc_pattern, text)
+                            if matches:
+                                return matches[0]
+                    except Exception as e:
+                        logger.debug(f"Text selector {selector} failed: {e}")
+                        continue
+                        
+                logger.error("Could not find calibration diagram or text")
+                return None
+            
+            # Take a screenshot of just the diagram
+            screenshot_path = os.path.join(self.debug_dir, "calibration_diagram.png")
+            await diagram.screenshot(path=screenshot_path)
+            logger.info(f"Saved diagram screenshot to {screenshot_path}")
+            
+            # Use pytesseract to extract text
+            img = Image.open(screenshot_path)
+            text = pytesseract.image_to_string(img)
+            logger.info(f"Extracted text from image: {text}")
+            
+            # Look for CSC model patterns
+            csc_pattern = r'(?:AUTEL-)?CSC0[80][0-9]{2}(?:/\d+)?'
+            matches = re.findall(csc_pattern, text)
+            
+            if matches:
+                csc_model = matches[0]
+                logger.info(f"Found CSC model: {csc_model}")
+                return csc_model
+            else:
+                # If no match found, try to find the text directly on the page
+                logger.info("No CSC model found in image, trying to find text on page...")
+                
+                # Get all text content from the page
+                page_text = await page.evaluate("""() => {
+                    return document.body.innerText;
+                }""")
+                
+                # Look for CSC model in page text
+                matches = re.findall(csc_pattern, page_text)
+                if matches:
+                    csc_model = matches[0]
+                    logger.info(f"Found CSC model in page text: {csc_model}")
+                    return csc_model
+                
+                logger.warning("No CSC model found in image or page text")
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error extracting CSC model: {e}")
+            return None
+
     async def scrape(self):
         """Main scraping function."""
         try:
@@ -323,6 +442,13 @@ class MaxiSysScraper:
                     logger.info(f"Calibration Type: {calibration_type}")
                 else:
                     logger.error("Failed to determine calibration type")
+                
+                # Get CSC model
+                csc_model = await self.get_csc_model(self.page)
+                if csc_model:
+                    logger.info(f"CSC Model: {csc_model}")
+                else:
+                    logger.warning("Failed to determine CSC model")
                 
                 # Capture final state
                 await self.capture_debug_info(self.page, "final_state")
