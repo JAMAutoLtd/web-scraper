@@ -1,0 +1,63 @@
+Acura OR Honda
+	adas_front_radar: ACC
+	adas_windshield_camera: LDW
+	adas_360_camera: Multi View Camera System
+Audi OR Volkswagen
+	adas_front_radar: 13 - Adaptive Cruise Control
+	adas_blind_spot_monitor: 3C - Lane change assistance
+	adas_360_camera: 6C - Camera System Rear View OR Camera System Rear View-AVM
+	adas_windshield_camera: A5 - Front sensor for drivers assistant systems OR 5C - Lane Assist
+
+Hyundai OR Kia
+	adas_blind_spot_monitor: BCW(Blind-Spot Collision Warning) OR RCR_L(Rear Corner Radar-Left) OR BSD-L(Blind Spot Detection-L) OR BSD(Blind Spot Detection)
+	adas_windshield_camera: F-CMR(Front View Camera) OR LDWD(Lane Departure Warning System) OR MFC(Multi Function Camera)
+	adas_front_radar: FCA(Forward Collision-Avoidance Assist) OR FR(Front Radar) OR SCC(Smart Cruise Control)
+	adas_360_camera: ADAS_P (Advanced Driver Assistance Systems_Parking)
+
+Infiniti OR Nissan
+	adas_360_camera: *return "autel" as the result here*
+	adas_front_radar: ICC/ADAS OR Laser/radar
+	adas_windshield_camera: Lane camera
+
+Toyota OR Lexus
+	adas_blind_spot_monitor: BSM
+	adas_windshield_camera: LDW
+	adas_front_radar: ACC
+	adas_360_camera: AVM_Special
+
+Maserati
+	adas_blind_spot_monitor: CVPM(Central vision processing module)
+	adas_windshield_camera: HALF(Haptic lane feedback module)
+	adas_front_radar: DASM(Driver assistance system module)
+	adas_360_camera: CVPM(Central vision processing module)
+
+Mazda
+	adas_blind_spot_monitor: FSRL OR BSM
+	adas_windshield_camera: FSC_********_North America OR FSC
+	adas_front_radar: FR OR SBS/MRCC
+	adas_360_camera: VMC
+
+Mercedes
+	adas_blind_spot_monitor: DISTRONIC
+	adas_windshield_camera: Multifunction camera OR Night View Assist control unit
+	adas_front_radar: Front radar sensor
+	adas_360_camera: 360 camera OR Reversing camera
+
+Mitsubishi ********* ADD TO MAPPING AS Mitsubishi(MMNA)
+	adas_blind_spot_monitor: BSW
+	adas_windshield_camera: FCM/LDW/AHB OR Lane Keep OR Front camera unit
+	adas_front_radar: ACC/FCM OR LASER/RADAR
+	adas_360_camera: Multi Around Monitor
+
+Porsche (Does not use Year)
+
+RAM etc. (Maybe just always dynamic?)
+
+Subaru
+
+Tesla
+
+Volvo
+
+
+
