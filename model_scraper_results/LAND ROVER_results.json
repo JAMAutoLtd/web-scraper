@@ -1,0 +1,69 @@
+{
+  "LAND ROVER": {
+    "models": {
+      "Defender": {
+        "years": []
+      },
+      "Discovery": {
+        "years": [
+          "2020"
+        ]
+      },
+      "Freelander": {
+        "years": []
+      },
+      "New Range Rover": {
+        "years": [
+          "2022",
+          "2016",
+          "2013"
+        ]
+      },
+      "New Range Rover Velar": {
+        "years": [
+          "2020"
+        ]
+      },
+      "Range Rover": {
+        "years": [
+          "2022",
+          "2016",
+          "2013"
+        ]
+      },
+      "Range Rover Evoque": {
+        "years": [
+          "2018",
+          "2017",
+          "2016"
+        ]
+      },
+      "Range Rover Sport": {
+        "years": []
+      },
+      "Discovery sport": {
+        "years": [
+          "2020",
+          "2017"
+        ]
+      },
+      "New Range rover evoque": {
+        "years": [
+          "2020",
+          "2019"
+        ]
+      },
+      "New Range Rover sport": {
+        "years": [
+          "2016"
+        ]
+      },
+      "Range Rover Evoque (China)": {
+        "years": []
+      },
+      "Range Rover Evoque convertible": {
+        "years": []
+      }
+    }
+  }
+}

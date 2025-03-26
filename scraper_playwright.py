@@ -37,6 +37,110 @@ class MaxiSysScraper:
     # Makes that require Engine/vehicle configuration selection
     MAKES_WITH_VEHICLE_CONFIG = ['VOLKSWAGEN', 'AUDI']
 
+    # Volkswagen model mapping system
+    # Maps user input models to possible website models with their earliest year
+    VW_MODEL_MAPPINGS = {
+        # Format: 'INPUT_MODEL': [('CODE_PATTERN', 'WEBSITE_MODEL', EARLIEST_YEAR), ...]
+        'ATLAS': [
+            ('CA/CM', 'Atlas', 2018),  # Atlas 2018+
+        ],
+        'ATLAS CROSS SPORT': [
+            ('CA/CM', 'Atlas', 2018),  # Atlas range includes Cross Sport
+        ],
+        'BEETLE': [
+            ('5C', 'Beetle', 2012),    # Beetle 2012+
+        ],
+        'GOLF': [
+            ('CD/CG', 'Golf', 2022),   # Golf 2022+
+            ('AU/BE/BX', 'Golf', 2013) # Golf 2013-2021
+        ],
+        'GOLF GTI': [
+            ('CD/CG', 'Golf', 2022),   # Golf 2022+ includes GTI
+            ('AU/BE/BX', 'Golf', 2013) # Golf 2013-2021 includes GTI
+        ],
+        'GOLF R': [
+            ('CD/CG', 'Golf', 2022),   # Golf 2022+ includes R
+            ('AU/BE/BX', 'Golf', 2013) # Golf 2013-2021 includes R
+        ],
+        'GOLF ALLTRACK': [
+            ('AU/BE/BX', 'Golf', 2013) # Golf 2013-2021 includes Alltrack
+        ],
+        'GOLF SPORTWAGEN': [
+            ('AU/BE/BX', 'Golf', 2013) # Golf 2013-2021 includes SportWagen
+        ],
+        'ID.4': [
+            ('E4', 'ID.4 X', 2021),    # ID.4 X 2021+
+            ('E8', 'ID.4 USA/CAN', 2021)  # ID.4 USA/CAN 2021+
+        ],
+        'ID.BUZZ': [
+            ('EB', 'ID.Buzz', 2022),   # ID.Buzz 2022+
+        ],
+        'JETTA': [
+            ('BU', 'Jetta', 2018),     # Jetta 2018+
+            ('16', 'Jetta', 2011)      # Jetta 2011-2017
+        ],
+        'JETTA GLI': [
+            ('BU', 'Jetta', 2018),     # Jetta 2018+ includes GLI
+            ('16', 'Jetta', 2011)      # Jetta 2011-2017 includes GLI
+        ],
+        'PASSAT': [
+            ('3G/CB', 'Passat', 2015), # Passat 2015+
+            ('36', 'Passat', 2011),    # Passat 2011-2014
+            ('35', 'Passat CC', 2009), # Passat CC 2009+
+            ('3C', 'Passat', 2006)     # Passat 2006-2008
+        ],
+        'ARTEON': [
+            ('3H', 'Arteon', 2017)     # Arteon 2017+
+        ],
+        'TAOS': [
+            ('CL', 'Taos', 2021)       # Taos 2021+
+        ],
+        'TIGUAN': [
+            ('BW', 'Tiguan', 2018),    # Tiguan 2018+
+            ('5T', 'Tiguan', 2016),    # Tiguan 2016-2017
+            ('5N', 'Tiguan', 2008)     # Tiguan 2008-2015
+        ],
+        'TOUAREG': [
+            ('CR/QT', 'Touareg MF', 2018), # Touareg MF 2018+
+            ('7P', 'Touareg', 2010),   # Touareg 2010-2017
+            ('7L', 'Touareg', 2003)    # Touareg 2003-2009
+        ],
+        'T-ROC': [
+            ('A1/AC', 'T-Roc', 2018)   # T-Roc 2018+
+        ],
+        'T-CROSS': [
+            ('AW/C1', 'T-Cross', 2019) # T-Cross 2019+
+        ],
+        'POLO': [
+            ('AW', 'Polo', 2018),      # Polo 2018+
+            ('6C', 'Polo', 2014),      # Polo 2014-2017
+            ('CK', 'Polo', 2020)       # Polo 2020+ (another model code variant)
+        ],
+        'TOURAN': [
+            ('5T', 'Touran', 2016),    # Touran 2016+
+            ('1T', 'Touran', 2011)     # Touran 2011-2015
+        ],
+        'VIRTUS': [
+            ('BZ', 'Polo/Virtus', 2018), # Polo/Virtus 2018+
+            ('CY', 'Virtus', 2022)     # Virtus 2022+
+        ],
+        'NIVUS': [
+            ('CH', 'Nivus', 2020)      # Nivus 2020+
+        ],
+        'TAYRON': [
+            ('RM', 'Tayron', 2024)     # Tayron 2024+
+        ],
+        'TAREK': [
+            ('CP', 'Tarek', 2021)      # Tarek 2021+
+        ],
+        'TERAMONT': [
+            ('CA/CM', 'Atlas', 2018)   # Atlas/Teramont share platform
+        ],
+        'PHIDEON': [
+            ('3E', 'Phideon', 2017)    # Phideon 2017+
+        ]
+    }
+
     def __init__(self):
         self.debug_dir = "debug_info"
         self.ensure_debug_directory()
@@ -177,7 +281,7 @@ class MaxiSysScraper:
             await self.capture_debug_info(page, f"dropdown_error_{identifying_text}")
             return False
 
-    async def interact_with_multilevel_dropdown(self, page, level_placeholders_options, vin=None):
+    async def interact_with_multilevel_dropdown(self, page, level_placeholders_options):
         """Interact with multi-level dropdowns sequentially."""
         try:
             # Click the main Make/Model/Year input to open the panel
@@ -199,9 +303,10 @@ class MaxiSysScraper:
             await make_element.click()
             await page.wait_for_timeout(2000)  # Wait for Model panel to appear
 
-            # Special handling for Volkswagen based on VIN
-            if make == "Volkswagen" and vin:
-                await self.select_volkswagen_model(page, vin)
+            # Special handling for Volkswagen based on YMM
+            database_make = level_placeholders_options[0][1].split('(')[0].strip().upper()
+            if database_make == "VOLKSWAGEN":
+                await self.select_volkswagen_model(page, model, year)
             else:
                 # Regular model selection
                 logger.info(f"Selecting Model: {model}")
@@ -343,17 +448,83 @@ class MaxiSysScraper:
             await self.capture_debug_info(page, "multilevel_dropdown_error")
             return False
 
-    async def select_volkswagen_model(self, page, vin):
-        """Special handling for Volkswagen models based on VIN."""
+    async def select_volkswagen_model(self, page, model_name, model_year):
+        """Special handling for Volkswagen models based on YMM."""
         try:
-            # Extract 7th and 8th characters from VIN
-            if len(vin) < 8:
-                raise ValueError(f"Invalid VIN length: {len(vin)}")
+            # Normalize the model name to uppercase for matching
+            normalized_model = model_name.upper()
+            logger.info(f"Selecting Volkswagen model: {normalized_model}, Year: {model_year}")
             
-            model_code = vin[6:8]  # Extract 7th and 8th char (0-indexed)
-            logger.info(f"Extracted model code from VIN: {model_code}")
+            # Find the mapping for this model
+            best_mapping = None
             
-            # Get all visible model options
+            # Check if we have a direct match
+            if normalized_model in self.VW_MODEL_MAPPINGS:
+                model_options = self.VW_MODEL_MAPPINGS[normalized_model]
+            else:
+                # If not, check for partial matches (e.g., "GOLF R" should match with "GOLF")
+                potential_matches = []
+                for key in self.VW_MODEL_MAPPINGS.keys():
+                    # If the input model starts with a mapping key (like GOLF GTI starts with GOLF)
+                    if normalized_model.startswith(key):
+                        potential_matches.append((key, len(key)))
+                    # If a mapping key starts with the input model (like GOLF starts with the input GOLF)
+                    elif key.startswith(normalized_model):
+                        potential_matches.append((key, len(normalized_model)))
+                
+                # Sort by match length (longer matches first)
+                potential_matches.sort(key=lambda x: x[1], reverse=True)
+                
+                if potential_matches:
+                    best_match = potential_matches[0][0]
+                    logger.info(f"No exact match found for '{normalized_model}', using best match: '{best_match}'")
+                    model_options = self.VW_MODEL_MAPPINGS[best_match]
+                else:
+                    # No match found, log error
+                    logger.error(f"No mapping found for Volkswagen model: {normalized_model}")
+                    # Get all available model options to help debug
+                    model_options = await page.evaluate("""() => {
+                        return Array.from(document.querySelectorAll('li'))
+                            .filter(el => el.offsetParent !== null)
+                            .map(el => el.textContent.trim())
+                            .filter(text => text.includes(' - ') && text.includes('USA/CAN'));
+                    }""")
+                    
+                    logger.info(f"Available Volkswagen model options:")
+                    for option in model_options:
+                        logger.info(f"- {option}")
+                        
+                    # Just take the first USA/CAN option
+                    if model_options and isinstance(model_options, list) and len(model_options) > 0:
+                        logger.info(f"No mapping found, selecting first available USA/CAN option")
+                        await page.click(f"text={model_options[0]}")
+                        return True
+                    return False
+            
+            # Find the most appropriate model range based on year
+            year = int(model_year)
+            appropriate_options = []
+            
+            for code_pattern, model, earliest_year in model_options:
+                # Check if the model year is in range for this option (assuming no upper limit)
+                if year >= earliest_year:
+                    appropriate_options.append((code_pattern, model, earliest_year))
+            
+            # Sort by year (descending) to get the newest range that's still applicable
+            appropriate_options.sort(key=lambda x: x[2], reverse=True)
+            
+            # If we don't have any appropriate options, log error and return
+            if not appropriate_options:
+                logger.error(f"No appropriate model range found for {normalized_model} year {year}")
+                return False
+            
+            # Select the first (newest) appropriate option
+            best_option = appropriate_options[0]
+            code_pattern, model, earliest_year = best_option
+            
+            logger.info(f"Selected model range: {code_pattern} - {model} {earliest_year} USA/CAN")
+            
+            # Get all visible model options from the page
             model_options = await page.evaluate("""() => {
                 return Array.from(document.querySelectorAll('li'))
                     .filter(el => el.offsetParent !== null)
@@ -361,35 +532,43 @@ class MaxiSysScraper:
                     .filter(text => text.includes(' - ') && text.includes('USA/CAN'));
             }""")
             
-            logger.info(f"Available Volkswagen model options:")
+            logger.info(f"Available Volkswagen model options on page:")
             for option in model_options:
                 logger.info(f"- {option}")
             
-            # Find the option that contains the model code before " - " and "USA/CAN" after
+            # Find the option that matches our criteria
             selected_option = None
             for option in model_options:
-                # Check if option has format like "CD/CG - Golf 2020 USA/CAN"
-                if ' - ' in option and 'USA/CAN' in option:
-                    prefix = option.split(' - ')[0]
-                    # Check if the model code is in the prefix
-                    if model_code in prefix.split('/'):
-                        selected_option = option
-                        break
+                # Look for code pattern match, model match, and USA/CAN
+                if (code_pattern in option and 
+                    f" - {model} " in option and 
+                    "USA/CAN" in option):
+                    selected_option = option
+                    break
             
+            # If we didn't find an exact match, look for a close match
             if not selected_option:
-                # As fallback, check if any option contains the model code
                 for option in model_options:
-                    if model_code in option and 'USA/CAN' in option:
+                    # Just match the code pattern and USA/CAN
+                    if code_pattern in option and "USA/CAN" in option:
                         selected_option = option
                         break
             
+            # If we still don't have a match, try just matching the code pattern
+            if not selected_option:
+                for option in model_options:
+                    if code_pattern in option:
+                        selected_option = option
+                        break
+            
+            # If we found an option, click it
             if selected_option:
-                logger.info(f"Selected Volkswagen model based on VIN: {selected_option}")
+                logger.info(f"Selected Volkswagen model option: {selected_option}")
                 await page.click(f"text={selected_option}")
                 return True
             else:
-                logger.error(f"Could not find matching model for VIN code: {model_code}")
-                raise Exception(f"No matching Volkswagen model found for VIN code: {model_code}")
+                logger.error(f"Could not find matching model option for {code_pattern} - {model} {earliest_year}")
+                return False
                 
         except Exception as e:
             logger.error(f"Error selecting Volkswagen model: {e}")
@@ -563,161 +742,39 @@ class MaxiSysScraper:
                 await page.wait_for_timeout(2000)  # Wait for dropdown to open
             except Exception as e:
                 logger.error(f"Could not find Engine/vehicle configuration dropdown: {e}")
-                # Take a screenshot to help debug
                 await self.capture_debug_info(page, "vehicle_config_error")
                 return False
             
             # The configuration options we want to find (in order of preference)
-            config_options = ["Sedan", "Saloon", "SUV", "Coupe"]
+            config_options = ["Sedan", "Saloon", "SUV", "Coupe", "Avant", "Roadster", "Sportback"]
             
-            # Get a more precise selector for the exact options
-            logger.info("Looking for vehicle configuration options")
+            logger.info(f"Looking for vehicle configuration options in order: {', '.join(config_options)}")
             
-            # Look for exact matches with these selectors
-            precise_selectors = [
-                "li:has-text('Sedan'):not(:has-text('Midsize')):not(:has-text('/'))",  # Exact match for Sedan
-                "//li[text()='Sedan']",  # Exact text match for Sedan
-                "//li[normalize-space(text())='Sedan']",  # Normalized exact match
-                "li:has-text('Saloon'):not(:has-text('/'))",  # Exact match for Saloon
-                "//li[text()='Saloon']",  # Exact text match for Saloon
-                "li:has-text('SUV'):not(:has-text('/'))",  # Exact match for SUV
-                "//li[text()='SUV']",  # Exact text match for SUV
-                "li:has-text('Coupe'):not(:has-text('/'))",  # Exact match for Coupe
-                "//li[text()='Coupe']"  # Exact text match for Coupe
-            ]
-            
-            for selector in precise_selectors:
-                try:
-                    logger.info(f"Trying selector: {selector}")
-                    element = await page.wait_for_selector(selector, timeout=5000)
-                    if element:
-                        # Verify this is the correct element before clicking
-                        text = await element.text_content()
-                        logger.info(f"Found matching element with text: '{text}'")
-                        
-                        # Let's be super careful and verify the exact text
-                        if text.strip() in config_options:
-                            logger.info(f"Clicking element with text: '{text}'")
-                            await element.scroll_into_view_if_needed()
-                            await element.click()
-                            await page.wait_for_timeout(2000)  # Wait for selection to apply
-                            return True
-                except Exception as e:
-                    logger.debug(f"Selector {selector} failed: {e}")
-                    continue
-            
-            # If the precise selectors didn't work, try a fallback approach
-            logger.info("Precise selectors failed, trying fallback approach")
-            
-            # Get all list items and look for exact matches
+            # Get all visible list items
             list_items = await page.evaluate("""() => {
                 return Array.from(document.querySelectorAll('li'))
                     .filter(el => el.offsetParent !== null)  // Only visible elements
-                    .map(el => ({
-                        text: el.textContent.trim(),
-                        isExactMatch: ['Sedan', 'Saloon', 'SUV', 'Coupe'].includes(el.textContent.trim())
-                    }));
+                    .map(el => el.textContent.trim());
             }""")
             
-            logger.info("Available list items:")
-            for item in list_items:
-                logger.info(f"- Text: '{item['text']}', Exact match: {item['isExactMatch']}")
+            logger.info(f"Found {len(list_items)} visible items")
             
-            # Find exact matches
-            exact_matches = [item for item in list_items if item['isExactMatch']]
-            if exact_matches:
-                target_text = exact_matches[0]['text']
-                logger.info(f"Found exact match: '{target_text}'. Attempting to click.")
+            # Find the first matching option in our preferred order
+            selected = False
+            for option in config_options:
+                if option in list_items:
+                    logger.info(f"Found preferred option: '{option}', clicking it")
+                    await page.click(f"li:text('{option}')")
+                    selected = True
+                    break
+            
+            if not selected:
+                logger.error("None of the preferred configuration options were found")
+                await self.capture_debug_info(page, "vehicle_config_error")
+                return False
                 
-                try:
-                    # Use JavaScript to click the element with the exact text
-                    await page.evaluate("""(text) => {
-                        const elements = Array.from(document.querySelectorAll('li'))
-                            .filter(el => el.offsetParent !== null)
-                            .filter(el => el.textContent.trim() === text);
-                        if (elements.length > 0) {
-                            elements[0].click();
-                            return true;
-                        }
-                        return false;
-                    }""", target_text)
-                    
-                    logger.info(f"Clicked element with text '{target_text}' using JavaScript")
-                    await page.wait_for_timeout(2000)  # Wait for selection to apply
-                    return True
-                except Exception as e:
-                    logger.error(f"JavaScript click failed: {e}")
-            
-            # If no exact matches found, try to find any vehicle type
-            logger.info("No exact matches found, checking for any vehicle type...")
-            vehicle_types = ["sedan", "saloon", "suv", "coupe", "hatchback", "wagon", "convertible", "crossover"]
-            
-            # Check each list item for partial matches with any vehicle type
-            partial_matches = []
-            for item in list_items:
-                item_text_lower = item['text'].lower()
-                # Check if any vehicle type is contained in the item text
-                for vehicle_type in vehicle_types:
-                    if vehicle_type in item_text_lower:
-                        partial_matches.append({
-                            'text': item['text'],
-                            'vehicle_type': vehicle_type
-                        })
-                        break
-            
-            if partial_matches:
-                first_match = partial_matches[0]['text']
-                logger.info(f"Found partial match for vehicle type: '{first_match}'. Attempting to click.")
-                
-                try:
-                    # Use JavaScript to click the element with the partial match
-                    await page.evaluate("""(text) => {
-                        const elements = Array.from(document.querySelectorAll('li'))
-                            .filter(el => el.offsetParent !== null)
-                            .filter(el => el.textContent.trim() === text);
-                        if (elements.length > 0) {
-                            elements[0].click();
-                            return true;
-                        }
-                        return false;
-                    }""", first_match)
-                    
-                    logger.info(f"Clicked element with text '{first_match}' using JavaScript")
-                    await page.wait_for_timeout(2000)  # Wait for selection to apply
-                    return True
-                except Exception as e:
-                    logger.error(f"JavaScript click failed for partial match: {e}")
-            
-            # If all else fails, try clicking the element directly by class
-            try:
-                logger.info("Trying to click the element with class='selected'")
-                await page.click("li.selected")
-                logger.info("Clicked the selected list item")
-                await page.wait_for_timeout(2000)
-                return True
-            except Exception as e:
-                logger.error(f"Failed to click selected item: {e}")
-                
-                # Final attempt - just click the first visible list item
-                try:
-                    logger.info("Last resort - clicking the first visible list item")
-                    await page.evaluate("""() => {
-                        const items = Array.from(document.querySelectorAll('li'))
-                            .filter(el => el.offsetParent !== null);
-                        if (items.length > 0) {
-                            items[0].click();
-                            return true;
-                        }
-                        return false;
-                    }""")
-                    logger.info("Clicked the first visible list item")
-                    await page.wait_for_timeout(2000)
-                    return True
-                except Exception as e2:
-                    logger.error(f"Failed to click first visible item: {e2}")
-            
-            logger.error("All attempts to select vehicle configuration failed")
-            return False
+            await page.wait_for_timeout(2000)  # Wait for selection to apply
+            return True
                 
         except Exception as e:
             logger.error(f"Error selecting vehicle configuration: {e}")
@@ -748,9 +805,8 @@ class MaxiSysScraper:
                 
                 # Example database input (to be replaced with actual database call later)
                 database_make = "VOLKSWAGEN"  # This will come from the database
-                database_model = "Golf"  # For Volkswagen, this will be derived from VIN
-                database_year = "2022"  # This will come from the database
-                database_vin = "WVWCB7CD0RW123456"  # Example VIN for a VW Golf
+                database_model = "Atlas Cross Sport"  # This will come from the database
+                database_year = "2020"  # This will come from the database
                 
                 # Convert database make to website format
                 website_make = self.get_website_make(database_make)
@@ -762,11 +818,8 @@ class MaxiSysScraper:
                     ("Year", database_year, False)
                 ]
                 
-                # For Volkswagen, pass the VIN for special handling
-                if database_make.upper() == "VOLKSWAGEN":
-                    await self.interact_with_multilevel_dropdown(self.page, multilevel_levels, database_vin)
-                else:
-                    await self.interact_with_multilevel_dropdown(self.page, multilevel_levels)
+                # VIN is no longer needed - everything uses YMM
+                await self.interact_with_multilevel_dropdown(self.page, multilevel_levels)
                 
                 # Note: Engine/vehicle configuration is now handled in interact_with_multilevel_dropdown
                 # for Volkswagen and Audi

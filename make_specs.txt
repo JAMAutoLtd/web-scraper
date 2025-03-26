@@ -1,23 +1,26 @@
 Acura OR Honda
 	adas_front_radar: ACC
+	adas_blind_spot_monitor: N/A
 	adas_windshield_camera: LDW
 	adas_360_camera: Multi View Camera System
+
 Audi OR Volkswagen
 	adas_front_radar: 13 - Adaptive Cruise Control
 	adas_blind_spot_monitor: 3C - Lane change assistance
-	adas_360_camera: 6C - Camera System Rear View OR Camera System Rear View-AVM
-	adas_windshield_camera: A5 - Front sensor for drivers assistant systems OR 5C - Lane Assist
+	adas_360_camera: 6C - Camera System Rear View, Camera System Rear View-AVM
+	adas_windshield_camera: A5 - Front sensor for drivers assistant systems, 5C - Lane Assist
 
 Hyundai OR Kia
-	adas_blind_spot_monitor: BCW(Blind-Spot Collision Warning) OR RCR_L(Rear Corner Radar-Left) OR BSD-L(Blind Spot Detection-L) OR BSD(Blind Spot Detection)
-	adas_windshield_camera: F-CMR(Front View Camera) OR LDWD(Lane Departure Warning System) OR MFC(Multi Function Camera)
-	adas_front_radar: FCA(Forward Collision-Avoidance Assist) OR FR(Front Radar) OR SCC(Smart Cruise Control)
+	adas_blind_spot_monitor: BCW(Blind-Spot Collision Warning), RCR_L(Rear Corner Radar-Left), BSD-L(Blind Spot Detection-L), BSD(Blind Spot Detection)
+	adas_windshield_camera: F-CMR(Front View Camera), LDWD(Lane Departure Warning System), MFC(Multi Function Camera)
+	adas_front_radar: FCA(Forward Collision-Avoidance Assist), FR(Front Radar), SCC(Smart Cruise Control)
 	adas_360_camera: ADAS_P (Advanced Driver Assistance Systems_Parking)
 
 Infiniti OR Nissan
-	adas_360_camera: *return "autel" as the result here*
-	adas_front_radar: ICC/ADAS OR Laser/radar
+	adas_360_camera: N/A
+	adas_front_radar: ICC/ADAS, Laser/radar
 	adas_windshield_camera: Lane camera
+	adas_blind_spot_monitor: N/A
 
 Toyota OR Lexus
 	adas_blind_spot_monitor: BSM
@@ -31,33 +34,53 @@ Maserati
 	adas_front_radar: DASM(Driver assistance system module)
 	adas_360_camera: CVPM(Central vision processing module)
 
-Mazda
-	adas_blind_spot_monitor: FSRL OR BSM
-	adas_windshield_camera: FSC_********_North America OR FSC
-	adas_front_radar: FR OR SBS/MRCC
+Mazda (the asterisks represent characters we don't care about, not necessarily of this length)
+	adas_blind_spot_monitor: FSRL, BSM
+	adas_windshield_camera: FSC_********_North America, FSC
+	adas_front_radar: FR, SBS/MRCC
 	adas_360_camera: VMC
 
 Mercedes
 	adas_blind_spot_monitor: DISTRONIC
-	adas_windshield_camera: Multifunction camera OR Night View Assist control unit
+	adas_windshield_camera: Multifunction camera, Night View Assist control unit
 	adas_front_radar: Front radar sensor
-	adas_360_camera: 360 camera OR Reversing camera
+	adas_360_camera: 360 camera, Reversing camera
 
-Mitsubishi ********* ADD TO MAPPING AS Mitsubishi(MMNA)
+Mitsubishi
 	adas_blind_spot_monitor: BSW
-	adas_windshield_camera: FCM/LDW/AHB OR Lane Keep OR Front camera unit
-	adas_front_radar: ACC/FCM OR LASER/RADAR
+	adas_windshield_camera: FCM/LDW/AHB, Lane Keep, Front camera unit
+	adas_front_radar: ACC/FCM, LASER/RADAR
 	adas_360_camera: Multi Around Monitor
 
 Porsche (Does not use Year)
+	adas_blind_spot_monitor: Left front corner radar sensor, Left Lane Change Assist 2(Slave), Right front corner radar sensor, Right Lane Change Assist 1(Master)
+	adas_windshield_camera: Assistance Systems - LDW
+ 	adas_front_radar: ACC(Distance Sensor)
+	adas_360_camera: Assistance Systems - AVM
+
 
 RAM etc. (Maybe just always dynamic?)
+	adas_blind_spot_monitor: N/A
+	adas_windshield_camera: N/A
+	adas_front_radar: N/A
+	adas_360_camera: N/A
 
 Subaru
+	adas_blind_spot_monitor: BSM, BSM(Hybrid), BSM(Outback), BSM(Wilderness)
+	adas_windshield_camera: Eyesight, Eyesight(Hybrid), Wide Angle Mono Camera
+	adas_front_radar: N/A
+	adas_360_camera: Front&Side Camera/Multi View Monitor
 
 Tesla
+	adas_blind_spot_monitor: N/A
+	adas_windshield_camera: DAS(Driver Assist)
+	adas_front_radar: RADC(Center Radar)
+	adas_360_camera: N/A
 
 Volvo
-
+	adas_blind_spot_monitor: SODL (Side obstacle detection control module left), SODR (Side obstacle detection control module right)
+	adas_windshield_camera: FLC2 (Forward Looking Camera 2)
+	adas_front_radar: FLR (Forward Looking Radar), FSM (Forward Sensing Module)
+	adas_360_camera: N/A
 
 

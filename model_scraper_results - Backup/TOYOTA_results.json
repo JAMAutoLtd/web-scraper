@@ -1,0 +1,120 @@
+{
+  "TOYOTA": {
+    "models": {
+      "Avalon": {
+        "years": []
+      },
+      "Avalon HV": {
+        "years": []
+      },
+      "BZ4X": {
+        "years": []
+      },
+      "Camry": {
+        "years": []
+      },
+      "Camry HV": {
+        "years": []
+      },
+      "Corolla": {
+        "years": []
+      },
+      "COROLLA CROSS": {
+        "years": []
+      },
+      "COROLLA CROSS HEV": {
+        "years": []
+      },
+      "Corolla HV": {
+        "years": []
+      },
+      "Corolla IM": {
+        "years": []
+      },
+      "CROWN HEV": {
+        "years": []
+      },
+      "CROWN SIGNIA HEV": {
+        "years": []
+      },
+      "GR COROLLA": {
+        "years": []
+      },
+      "Grand Highlander": {
+        "years": []
+      },
+      "Grand Highlander HEV": {
+        "years": []
+      },
+      "HighLander": {
+        "years": []
+      },
+      "HighLander HV": {
+        "years": []
+      },
+      "Hilux": {
+        "years": []
+      },
+      "Land Cruiser": {
+        "years": []
+      },
+      "Land Cruiser HEV": {
+        "years": []
+      },
+      "Mirai": {
+        "years": []
+      },
+      "Prius": {
+        "years": []
+      },
+      "PRIUS PHEV": {
+        "years": []
+      },
+      "Prius PHV": {
+        "years": []
+      },
+      "Prius Prime": {
+        "years": []
+      },
+      "RAV4": {
+        "years": []
+      },
+      "RAV4 HV": {
+        "years": []
+      },
+      "Rav4 Prime": {
+        "years": []
+      },
+      "Sequoia": {
+        "years": []
+      },
+      "SEQUOIA HEV": {
+        "years": []
+      },
+      "Sienna": {
+        "years": []
+      },
+      "Sienna HV": {
+        "years": []
+      },
+      "Tacoma": {
+        "years": []
+      },
+      "Tacoma HEV": {
+        "years": []
+      },
+      "Tundra": {
+        "years": []
+      },
+      "TUNDRA HEV": {
+        "years": []
+      },
+      "Venza HV": {
+        "years": []
+      },
+      "Yaris": {
+        "years": []
+      }
+    }
+  }
+}
