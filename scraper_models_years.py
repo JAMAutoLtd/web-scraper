@@ -23,8 +23,7 @@ class ModelYearScraper:
     # Define make mappings
     MAKE_MAPPINGS = {
         'ACURA': 'Acura(CANADA)',
-        'ALFA ROMEO': 'Alfa Romeo',
-        'ASTON MARTIN': 'Aston Martin',
+        'ALFA ROMEO': 'Alfa',
         'AUDI': 'Audi',
         'BENTLEY': 'Bentley',
         'BMW': 'BMW',
@@ -33,7 +32,6 @@ class ModelYearScraper:
         'CHEVROLET': 'Chevrolet',
         'CHRYSLER': 'Chrysler',
         'DODGE': 'Dodge',
-        'FERRARI': 'Ferrari',
         'FIAT': 'Fiat',
         'FORD': 'Ford',
         'GENESIS': 'Genesis(Canada)',
@@ -48,16 +46,14 @@ class ModelYearScraper:
         'LAND ROVER': 'Land Rover',
         'LEXUS': 'LEXUS(USA)',
         'LINCOLN': 'Lincoln',
-        'LOTUS': 'Lotus',
         'MASERATI': 'Maserati',
-        'MAZDA': 'Mazda(North America)',
-        'MERCEDES-BENZ': 'Mercedes-Benz',
+        'MAZDA': 'Mazda',
+        'MERCEDES-BENZ': 'Mercedes Benz',
         'MINI': 'MINI',
         'MITSUBISHI': 'Mitsubishi',
         'NISSAN': 'Nissan(North America)',
         'PORSCHE': 'Porsche',
         'RAM': 'RAM',
-        'ROLLS-ROYCE': 'Rolls-Royce',
         'SUBARU': 'Subaru(US)',
         'TESLA': 'Tesla',
         'TOYOTA': 'Toyota(USA)',
@@ -68,26 +64,35 @@ class ModelYearScraper:
     # Special handling configurations
     CHASSIS_BASED_MANUFACTURERS = {'BMW', 'MINI'}
     MODEL_DESIGNATION_MANUFACTURERS = {
-        'VOLKSWAGEN', 'LAMBORGHINI', 'MERCEDES-BENZ'  # Removed PORSCHE since it doesn't need year
+        'MERCEDES-BENZ'  # Removed LAMBORGHINI since it uses years like Audi
     }
 
     # Manufacturers that use year ranges in their model names
-    YEAR_RANGE_MANUFACTURERS = {'AUDI', 'BENTLEY'}
+    YEAR_RANGE_MANUFACTURERS = {'AUDI', 'BENTLEY', 'LAMBORGHINI'}  # Added LAMBORGHINI since it uses model-attached ranges
 
     # Manufacturers that use special year range formats (e.g., "2021~" or "~2020", "2021-", "2018-2019")
-    YEAR_RANGE_FORMAT_MANUFACTURERS = {'TESLA', 'JAGUAR'}
+    YEAR_RANGE_FORMAT_MANUFACTURERS = {'TESLA', 'JAGUAR', 'LAND ROVER'}  # Added LAND ROVER
 
     # Manufacturers that don't use years (only models with their ranges in the model name)
     NO_YEAR_MANUFACTURERS = {'PORSCHE', 'MERCEDES-BENZ'}
 
+    # Special models that use model codes instead of years
+    MODEL_CODE_MODELS = {
+        'LEXUS': {
+            'IS500': 'model_code',
+            'LC500': 'model_code',
+            'LC500c': 'model_code'
+        }
+    }
+
     # List of manufacturers to scrape
     MANUFACTURERS = [
-        'ACURA', 'ALFA ROMEO', 'ASTON MARTIN', 'AUDI', 'BENTLEY', 'BMW',
-        'BUICK', 'CADILLAC', 'CHEVROLET', 'CHRYSLER', 'DODGE', 'FERRARI', 'FIAT',
+        'ACURA', 'ALFA ROMEO', 'AUDI', 'BENTLEY', 'BMW',
+        'BUICK', 'CADILLAC', 'CHEVROLET', 'CHRYSLER', 'DODGE', 'FIAT',
         'FORD', 'GENESIS', 'GMC', 'HONDA', 'HYUNDAI', 'INFINITI', 'JAGUAR', 'JEEP',
-        'KIA', 'LAMBORGHINI', 'LAND ROVER', 'LEXUS', 'LINCOLN', 'LOTUS', 'MASERATI',
+        'KIA', 'LAMBORGHINI', 'LAND ROVER', 'LEXUS', 'LINCOLN', 'MASERATI',
         'MAZDA', 'MERCEDES-BENZ', 'MINI', 'MITSUBISHI', 'NISSAN',
-        'PORSCHE', 'RAM', 'ROLLS-ROYCE', 'SUBARU', 'TESLA', 'TOYOTA', 'VOLKSWAGEN', 'VOLVO'
+        'PORSCHE', 'RAM', 'SUBARU', 'TESLA', 'TOYOTA', 'VOLKSWAGEN', 'VOLVO'
     ]
 
     # Preferred regions in order of priority
@@ -161,62 +166,91 @@ class ModelYearScraper:
             
             # Handle Make selection
             logger.info(f"Selecting Make: {make}")
-            make_selector = f"text={make}"
-            try:
-                # Reduced timeout to 3 seconds since if the make exists, it should be visible quickly
-                make_element = await page.wait_for_selector(make_selector, timeout=3000)
+            
+            # For Mercedes-Benz, use a more precise selector
+            if make == 'Mercedes Benz':
+                # Try multiple selectors for Mercedes Benz
+                selectors = [
+                    "//li[text()='Mercedes Benz']",  # Exact match for Mercedes Benz
+                    "//li[normalize-space(text())='Mercedes Benz']",  # Normalized space match
+                    "//li[contains(text(), 'Mercedes') and not(contains(text(), 'LD'))]"  # Contains Mercedes but not LD
+                ]
+                
+                make_element = None
+                for selector in selectors:
+                    try:
+                        logger.info(f"Trying Mercedes Benz selector: {selector}")
+                        make_element = await page.wait_for_selector(selector, timeout=2000)
+                        if make_element:
+                            logger.info(f"Found Mercedes Benz element with selector: {selector}")
+                            break
+                    except Exception as e:
+                        logger.debug(f"Selector {selector} failed: {e}")
+                        continue
+                
                 if not make_element:
-                    logger.error(f"Could not find Make option: {make}")
+                    # If no selector worked, try to find all visible makes to help debug
+                    visible_makes = await page.evaluate("""() => {
+                        return Array.from(document.querySelectorAll('li'))
+                            .filter(el => el.offsetParent !== null)
+                            .map(el => el.textContent.trim())
+                            .filter(text => text.includes('Mercedes'));
+                    }""")
+                    logger.error(f"Could not find Mercedes Benz make. Visible Mercedes options: {visible_makes}")
                     return False
+            else:
+                make_selector = f"text={make}"
+                make_element = await page.wait_for_selector(make_selector, timeout=3000)
+            
+            if not make_element:
+                logger.error(f"Could not find Make option: {make}")
+                return False
+            
+            # Click the make element
+            await make_element.click()
+            logger.info(f"Clicked on make: {make}")
+            
+            # Wait for the model dropdown to appear using a more reliable selector
+            try:
+                # Wait for either the model dropdown or model list to be visible
+                model_visible = await page.wait_for_selector("""
+                    .dropbox.level2:visible, 
+                    .model-list:visible, 
+                    .model-column:visible
+                """, timeout=2000)  # Reduced timeout since this should appear quickly after make selection
                 
-                await make_element.click()
-                logger.info(f"Clicked on make: {make}")
-                
-                # Wait for the model dropdown to appear using a more reliable selector
-                try:
-                    # Wait for either the model dropdown or model list to be visible
-                    model_visible = await page.wait_for_selector("""
-                        .dropbox.level2:visible, 
-                        .model-list:visible, 
-                        .model-column:visible
-                    """, timeout=2000)  # Reduced timeout since this should appear quickly after make selection
-                    
-                    if model_visible:
-                        logger.info("Model dropdown/list is visible")
-                        return True
-                    
-                except Exception as e:
-                    logger.warning(f"Initial model dropdown check failed: {e}")
-                
-                # If we reach here, the dropdown might need a moment to load
-                await page.wait_for_timeout(500)  # Reduced from 1000ms to 500ms
-                
-                # One final check before giving up
-                is_visible = await page.evaluate("""() => {
-                    const modelElements = [
-                        document.querySelector('.dropbox.level2'),
-                        document.querySelector('.model-list'),
-                        document.querySelector('.model-column')
-                    ].filter(el => el !== null);
-                    
-                    return modelElements.some(el => 
-                        window.getComputedStyle(el).display !== 'none' &&
-                        el.offsetParent !== null
-                    );
-                }""")
-                
-                if is_visible:
-                    logger.info("Model selection area found on final check")
+                if model_visible:
+                    logger.info("Model dropdown/list is visible")
                     return True
                 
-                logger.error("Model dropdown/list not visible after all attempts")
-                await self.capture_debug_info(page, f"make_selection_error_{make}")
-                return False
-                
             except Exception as e:
-                logger.error(f"Failed to select make '{make}': {e}")
-                return False
+                logger.warning(f"Initial model dropdown check failed: {e}")
+            
+            # If we reach here, the dropdown might need a moment to load
+            await page.wait_for_timeout(500)  # Reduced from 1000ms to 500ms
+            
+            # One final check before giving up
+            is_visible = await page.evaluate("""() => {
+                const modelElements = [
+                    document.querySelector('.dropbox.level2'),
+                    document.querySelector('.model-list'),
+                    document.querySelector('.model-column')
+                ].filter(el => el !== null);
                 
+                return modelElements.some(el => 
+                    window.getComputedStyle(el).display !== 'none' &&
+                    el.offsetParent !== null
+                );
+            }""")
+            
+            if is_visible:
+                logger.info("Model selection area found on final check")
+                return True
+            
+            logger.error("Model dropdown/list not visible after all attempts")
+            await self.capture_debug_info(page, f"make_selection_error_{make}")
+            return False
+            
         except Exception as e:
             logger.error(f"Failed to select make '{make}': {e}")
             await self.capture_debug_info(page, f"make_selection_error_{make}")
@@ -413,7 +447,14 @@ class ModelYearScraper:
                 const tableElements = document.querySelectorAll('table td, div.model-list li, .model-column li');
                 
                 if (tableElements.length > 0) {
-                    // If there's a specific element with this model, return true - we're in table view
+                    // For MINI, find the second instance since the first is the manufacturer
+                    if (modelName === 'MINI') {
+                        const miniElements = Array.from(tableElements)
+                            .filter(el => el.textContent.trim() === modelName);
+                        return miniElements.length >= 2;  // We need at least 2 MINI elements
+                    }
+                    
+                    // For other manufacturers, look for exact match
                     for (const el of tableElements) {
                         if (el.textContent.trim() === modelName) {
                             return true;
@@ -421,11 +462,7 @@ class ModelYearScraper:
                     }
                 }
                 
-                // If no exact match, look for any element containing this model
-                const anyModelElement = Array.from(document.querySelectorAll('*'))
-                    .find(el => el.textContent.trim() === modelName);
-                    
-                return !!anyModelElement;
+                return false;
             }""", model)
             
             logger.info(f"Is table view with models: {is_table_view}")
@@ -434,7 +471,31 @@ class ModelYearScraper:
                 # Try clicking on the model in the table view
                 logger.info("Using table view mode to select model")
                 
-                # Try multiple selectors to find and click the model
+                # For MINI, use specific handling to click the second instance
+                if model == 'MINI':
+                    clicked = await page.evaluate("""() => {
+                        const miniElements = Array.from(document.querySelectorAll('table td, div.model-list li, .model-column li'))
+                            .filter(el => el.textContent.trim() === 'MINI' && 
+                                        !el.closest('.manufacturer') &&
+                                        !el.closest('.make-list'));
+                        
+                        if (miniElements.length >= 1) {
+                            // Click the last MINI element (should be the model, not the make)
+                            miniElements[miniElements.length - 1].click();
+                            return true;
+                        }
+                        return false;
+                    }""")
+                    
+                    if clicked:
+                        logger.info("Successfully clicked MINI model")
+                        await page.wait_for_timeout(2000)
+                        return True
+                    else:
+                        logger.warning("Could not find MINI model to click")
+                        return False
+                
+                # For other manufacturers, use the existing logic
                 selectors = [
                     f"table td:has-text('{model}')",
                     f"div.model-list li:has-text('{model}')",
@@ -462,7 +523,23 @@ class ModelYearScraper:
                     # Try JavaScript click as a last resort
                     logger.info("Trying JavaScript click on model")
                     clicked = await page.evaluate("""(modelName) => {
-                        // Find any element with exact model text
+                        // For MINI, find the first model element that's not a manufacturer
+                        if (modelName === 'MINI') {
+                            const elements = Array.from(document.querySelectorAll('li'))
+                                .filter(el => 
+                                    el.textContent.trim() === modelName && 
+                                    !el.closest('.manufacturer') &&
+                                    !el.closest('.make-list')
+                                );
+                            
+                            if (elements.length > 0) {
+                                elements[0].click();
+                                return true;
+                            }
+                            return false;
+                        }
+                        
+                        // For other manufacturers, find exact match
                         const elements = Array.from(document.querySelectorAll('*'))
                             .filter(el => el.textContent.trim() === modelName);
                             
@@ -550,13 +627,43 @@ class ModelYearScraper:
         try:
             logger.info(f"Getting years/chassis for {manufacturer} - {model}")
             
+            # Check if this is a special Lexus model that uses model codes
+            if manufacturer == 'LEXUS' and model in self.MODEL_CODE_MODELS['LEXUS']:
+                logger.info(f"Special Lexus model {model} detected - looking for model code instead of year")
+                try:
+                    # Click the Year/System dropdown as we still need to open it
+                    year_system_selector = "input[placeholder='Year/System']"
+                    year_system_element = await page.wait_for_selector(year_system_selector, timeout=5000)
+                    if year_system_element:
+                        await year_system_element.click()
+                        logger.info("Clicked Year/System dropdown")
+                        await page.wait_for_timeout(1000)  # Wait for dropdown to open
+                    
+                    # Look for three-letter model codes
+                    model_codes = await page.evaluate("""() => {
+                        const elements = document.querySelectorAll('.dropbox.level3 li, table td');
+                        return Array.from(elements)
+                            .map(el => el.textContent.trim())
+                            .filter(text => /^[A-Z]{3}$/.test(text));  // Match exactly three uppercase letters
+                    }""")
+                    
+                    if model_codes:
+                        logger.info(f"Found model codes for {model}: {model_codes}")
+                        return model_codes
+                    else:
+                        logger.warning(f"No model codes found for Lexus {model}")
+                        return []
+                except Exception as e:
+                    logger.error(f"Error getting model code for Lexus {model}: {e}")
+                    return []
+            
             # If manufacturer doesn't use years, return empty list
             if manufacturer in self.NO_YEAR_MANUFACTURERS:
                 logger.info(f"Skipping year/chassis for {manufacturer} as it doesn't use years")
                 return []
             
-            # For Toyota, we need to click the Year/System dropdown first
-            if manufacturer == 'TOYOTA':
+            # For Toyota and Lexus, we need to click the Year/System dropdown first
+            if manufacturer in {'TOYOTA', 'LEXUS'}:
                 try:
                     # Click the Year/System dropdown
                     year_system_selector = "input[placeholder='Year/System']"
@@ -628,10 +735,11 @@ class ModelYearScraper:
                             re.match(r'^.*\((19|20)\d{2}.*\)$', item)):    # Year in parentheses
                             filtered_data.append(item)
                     elif is_year_range_format:
-                        # For Tesla/Jaguar-style year ranges
-                        if manufacturer == 'TESLA':
-                            if (re.match(r'^(19|20)\d{2}~$', item) or      # "2021~" format
-                                re.match(r'^~(19|20)\d{2}$', item)):       # "~2020" format
+                        # For Tesla/Land Rover/Jaguar-style year ranges
+                        if manufacturer in {'TESLA', 'LAND ROVER'}:
+                            if (re.match(r'^(19|20)\d{2}[-~]$', item) or      # "2021-" or "2021~" format
+                                re.match(r'^[-~](19|20)\d{2}$', item) or      # "-2020" or "~2020" format
+                                re.match(r'^(19|20)\d{2}-(19|20)\d{2}$', item)):  # "2017-2019" format
                                 filtered_data.append(item)
                         elif manufacturer == 'JAGUAR':
                             if (re.match(r'^(19|20)\d{2}-$', item) or          # "2021-" format
@@ -649,11 +757,11 @@ class ModelYearScraper:
                 # Sort years in descending order if they're numeric
                 if filtered_data and not is_chassis_based:
                     if is_year_range_format:
-                        if manufacturer == 'TESLA':
-                            # Sort Tesla-style year ranges with "later" years first
+                        if manufacturer in {'TESLA', 'LAND ROVER'}:
+                            # Sort Tesla/Land Rover-style year ranges with "later" years first
                             filtered_data.sort(key=lambda x: (
                                 int(re.search(r'(19|20)\d{2}', x).group(0)),  # Extract year
-                                '~' in x  # Put "later" years first
+                                '-' in x or '~' in x  # Put ranges first
                             ), reverse=True)
                         elif manufacturer == 'JAGUAR':
                             # Sort Jaguar-style year ranges
