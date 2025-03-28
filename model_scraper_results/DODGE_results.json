@@ -7,7 +7,37 @@
           "2017",
           "2016",
           "2015"
-        ]
+        ],
+        "year": [
+          "2018",
+          "2017",
+          "2016",
+          "2015"
+        ],
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2017": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2016": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2015": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "BV-RENEGADE": {
         "years": [
@@ -17,13 +47,73 @@
           "2021",
           "2020",
           "2019"
-        ]
+        ],
+        "year": [
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "GG-Hornet": {
         "years": [
           "2024",
           "2023"
-        ]
+        ],
+        "year": [
+          "2024",
+          "2023"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "JL-Wrangler": {
         "years": [
@@ -34,7 +124,58 @@
           "2021",
           "2020",
           "2019"
-        ]
+        ],
+        "year": [
+          "2025",
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019"
+        ],
+        "2025": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "JT-Gladiator": {
         "years": [
@@ -44,7 +185,51 @@
           "2022",
           "2021",
           "2020"
-        ]
+        ],
+        "year": [
+          "2025",
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020"
+        ],
+        "2025": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "K8-Grand Commander": {
         "years": [
@@ -54,7 +239,51 @@
           "2020",
           "2019",
           "2018"
-        ]
+        ],
+        "year": [
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019",
+          "2018"
+        ],
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "KL-Cherokee": {
         "years": [
@@ -68,7 +297,79 @@
           "2016",
           "2015",
           "2014"
-        ]
+        ],
+        "year": [
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019",
+          "2018",
+          "2017",
+          "2016",
+          "2015",
+          "2014"
+        ],
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2017": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2016": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2015": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2014": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "LA-Challenger": {
         "years": [
@@ -81,7 +382,72 @@
           "2017",
           "2016",
           "2015"
-        ]
+        ],
+        "year": [
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019",
+          "2018",
+          "2017",
+          "2016",
+          "2015"
+        ],
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2017": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2016": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2015": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "LD-Charger": {
         "years": [
@@ -98,7 +464,100 @@
           "2013",
           "2012",
           "2011"
-        ]
+        ],
+        "year": [
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019",
+          "2018",
+          "2017",
+          "2016",
+          "2015",
+          "2014",
+          "2013",
+          "2012",
+          "2011"
+        ],
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2017": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2016": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2015": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2014": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2013": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2012": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2011": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "MP-COMPASS": {
         "years": [
@@ -111,14 +570,102 @@
           "2019",
           "2018",
           "2017"
-        ]
+        ],
+        "year": [
+          "2025",
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019",
+          "2018",
+          "2017"
+        ],
+        "2025": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2017": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "MV-COMPASS": {
         "years": [
           "2024",
           "2023",
           "2022"
-        ]
+        ],
+        "year": [
+          "2024",
+          "2023",
+          "2022"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "PD-Neon": {
         "years": [
@@ -127,7 +674,44 @@
           "2019",
           "2018",
           "2017"
-        ]
+        ],
+        "year": [
+          "2021",
+          "2020",
+          "2019",
+          "2018",
+          "2017"
+        ],
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2017": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "RU-CHRYSLER PACIFICA": {
         "years": [
@@ -140,7 +724,72 @@
           "2019",
           "2018",
           "2017"
-        ]
+        ],
+        "year": [
+          "2025",
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019",
+          "2018",
+          "2017"
+        ],
+        "2025": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2017": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "VF-ProMaster": {
         "years": [
@@ -149,19 +798,88 @@
           "2023",
           "2022",
           "2021"
-        ]
+        ],
+        "year": [
+          "2025",
+          "2024",
+          "2023",
+          "2022",
+          "2021"
+        ],
+        "2025": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "W3-GRAND CHEROKEE": {
         "years": [
           "2021",
           "2020",
           "2019"
-        ]
+        ],
+        "year": [
+          "2021",
+          "2020",
+          "2019"
+        ],
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "W7-JEEP Grand Cherokee": {
         "years": [
           "2024"
-        ]
+        ],
+        "year": [
+          "2024"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "WD-Durango": {
         "years": [
@@ -179,19 +897,151 @@
           "2013",
           "2012",
           "2011"
-        ]
+        ],
+        "year": [
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019",
+          "2018",
+          "2017",
+          "2016",
+          "2015",
+          "2014",
+          "2013",
+          "2012",
+          "2011"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2017": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2016": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2015": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2014": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2013": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2012": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2011": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "WS-Wagoneer": {
         "years": [
           "2024",
           "2023",
           "2022"
-        ]
+        ],
+        "year": [
+          "2024",
+          "2023",
+          "2022"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "XC-Commander": {
         "years": [
           "2022"
-        ]
+        ],
+        "year": [
+          "2022"
+        ],
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "D2-Ram 3500 Pickup": {
         "years": [
@@ -201,7 +1051,51 @@
           "2021",
           "2020",
           "2019"
-        ]
+        ],
+        "year": [
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "DD-Ram 3500 Cab Chassis": {
         "years": [
@@ -211,7 +1105,51 @@
           "2021",
           "2020",
           "2019"
-        ]
+        ],
+        "year": [
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "DF-Ram 3500 cab chassis 10K": {
         "years": [
@@ -221,7 +1159,51 @@
           "2021",
           "2020",
           "2019"
-        ]
+        ],
+        "year": [
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "DJ-Ram 2500": {
         "years": [
@@ -231,7 +1213,51 @@
           "2021",
           "2020",
           "2019"
-        ]
+        ],
+        "year": [
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "DP-Ram 4500/5500": {
         "years": [
@@ -241,7 +1267,51 @@
           "2021",
           "2020",
           "2019"
-        ]
+        ],
+        "year": [
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "DT-Ram 1500": {
         "years": [
@@ -252,13 +1322,80 @@
           "2021",
           "2020",
           "2019"
-        ]
+        ],
+        "year": [
+          "2025",
+          "2024",
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019"
+        ],
+        "2025": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "JJ-Avenger,JUNIOR JEEP": {
         "years": [
           "2024",
           "2023"
-        ]
+        ],
+        "year": [
+          "2024",
+          "2023"
+        ],
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "LX-300,Charger,Magnum,Grand voyager": {
         "years": [
@@ -275,13 +1412,122 @@
           "2013",
           "2012",
           "2011"
-        ]
+        ],
+        "year": [
+          "2023",
+          "2022",
+          "2021",
+          "2020",
+          "2019",
+          "2018",
+          "2017",
+          "2016",
+          "2015",
+          "2014",
+          "2013",
+          "2012",
+          "2011"
+        ],
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2017": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2016": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2015": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2014": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2013": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2012": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2011": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "T1-RAM 1000": {
         "years": [
           "2021",
           "2020"
-        ]
+        ],
+        "year": [
+          "2021",
+          "2020"
+        ],
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "UF-CHRYSLER 200": {
         "years": [
@@ -289,7 +1535,37 @@
           "2017",
           "2016",
           "2015"
-        ]
+        ],
+        "year": [
+          "2018",
+          "2017",
+          "2016",
+          "2015"
+        ],
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2017": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2016": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2015": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "WK-Grand cherokee": {
         "years": [
@@ -305,7 +1581,93 @@
           "2013",
           "2012",
           "2011"
-        ]
+        ],
+        "year": [
+          "2022",
+          "2021",
+          "2020",
+          "2019",
+          "2018",
+          "2017",
+          "2016",
+          "2015",
+          "2014",
+          "2013",
+          "2012",
+          "2011"
+        ],
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2020": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2019": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2018": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2017": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2016": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2015": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2014": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2013": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2012": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2011": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "WL-Grand Cherokee L": {
         "years": [
@@ -314,7 +1676,44 @@
           "2023",
           "2022",
           "2021"
-        ]
+        ],
+        "year": [
+          "2025",
+          "2024",
+          "2023",
+          "2022",
+          "2021"
+        ],
+        "2025": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2024": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2023": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2022": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "2021": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       }
     }
   }

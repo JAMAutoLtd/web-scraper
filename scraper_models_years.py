@@ -7,6 +7,13 @@ import logging
 import re
 import json
 import time
+import pytesseract
+from PIL import Image
+import io
+import requests
+
+# Set up Tesseract path
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # Set up logging
 logging.basicConfig(
@@ -224,7 +231,7 @@ class ModelYearScraper:
                     return False
             else:
                 make_selector = f"text={make}"
-                make_element = await page.wait_for_selector(make_selector, timeout=3000)
+                make_element = await page.wait_for_selector(make_selector, timeout=2000)
             
             if not make_element:
                 logger.error(f"Could not find Make option: {make}")
@@ -867,7 +874,7 @@ class ModelYearScraper:
                 return []
             
             # Give it a moment to stabilize
-            await page.wait_for_timeout(2000)
+            await page.wait_for_timeout(1000)
             
             # Wait for the dropdown to be visible
             try:
@@ -883,7 +890,7 @@ class ModelYearScraper:
                 
                 if not is_visible:
                     logger.info(f"Waiting for {data_type} to appear...")
-                    await page.wait_for_timeout(3000)
+                    await page.wait_for_timeout(2000)
             except Exception as e:
                 logger.warning(f"Error checking {data_type} dropdown visibility: {e}")
             
@@ -926,6 +933,70 @@ class ModelYearScraper:
         try:
             logger.info(f"Interacting with dropdown: '{identifying_text}' to select '{option_text}'")
             
+            # Special handling for Kia, Hyundai, and Genesis engine selection
+            if identifying_text == "System" and option_text in ["ACC", "LDW"]:
+                # Check if we're dealing with Kia, Hyundai, or Genesis
+                current_make = await page.evaluate("""() => {
+                    const makeInput = document.querySelector("input[placeholder='Make/Model/Year']");
+                    return makeInput ? makeInput.value : '';
+                }""")
+                
+                if current_make in ["Kia", "Hyundai", "Genesis"]:
+                    logger.info(f"Special handling for {current_make} engine selection")
+                    
+                    # Look for the Engine/vehicle configuration/System field
+                    engine_selector = "input[placeholder='Engine/vehicle configuration/System']"
+                    try:
+                        engine_field = await page.wait_for_selector(engine_selector, timeout=2000)
+                        if engine_field:
+                            logger.info("Found Engine/vehicle configuration/System field")
+                            await engine_field.click()
+                            await page.wait_for_timeout(1000)
+                            
+                            # Get all available engine options
+                            engine_options = await page.evaluate("""() => {
+                                return Array.from(document.querySelectorAll('li'))
+                                    .filter(el => el.offsetParent !== null)
+                                    .map(el => el.textContent.trim())
+                                    .filter(text => text.startsWith('G ') || text.endsWith('kW'));
+                            }""")
+                            
+                            if engine_options:
+                                logger.info(f"Found engine options: {engine_options}")
+                                # Select the first available engine option
+                                engine_option = engine_options[0]
+                                logger.info(f"Selecting engine option: {engine_option}")
+                                
+                                # Click the engine option
+                                engine_clicked = await page.evaluate("""(engineText) => {
+                                    const options = Array.from(document.querySelectorAll('li'));
+                                    const targetOption = options.find(el => 
+                                        el.textContent.trim() === engineText && 
+                                        el.offsetParent !== null
+                                    );
+                                    if (targetOption) {
+                                        targetOption.click();
+                                        return true;
+                                    }
+                                    return false;
+                                }""", engine_option)
+                                
+                                if engine_clicked:
+                                    logger.info("Successfully selected engine option")
+                                    await page.wait_for_timeout(2000)  # Wait for System options to appear
+                                    # Now proceed with normal System selection
+                                    identifying_text = "System"
+                                    need_to_open = True
+                                else:
+                                    logger.warning("Failed to select engine option")
+                                    return False
+                            else:
+                                logger.warning("No engine options found")
+                                return False
+                    except Exception as e:
+                        logger.error(f"Error handling engine selection: {e}")
+                        return False
+            
             # Wait for and click the dropdown toggle
             dropdown_selector = f"input[placeholder='{identifying_text}']"
             dropdown = await page.wait_for_selector(dropdown_selector, timeout=10000)
@@ -938,7 +1009,7 @@ class ModelYearScraper:
             try:
                 # Wait for any dropdown list container to appear
                 await page.wait_for_selector("ul:visible, .dropbox ul:visible, .dropdown ul:visible", timeout=5000)
-                logger.info("Dropdown list container is visible")
+
             except Exception as e:
                 logger.error(f"Could not find visible dropdown list: {e}")
             
@@ -952,8 +1023,8 @@ class ModelYearScraper:
             option_found = False
             for selector in selectors:
                 try:
-                    logger.info(f"Trying selector: {selector}")
-                    element = await page.wait_for_selector(selector, timeout=5000)
+
+                    element = await page.wait_for_selector(selector, timeout=2000)
                     if element:
                         # Verify this is the correct element before clicking
                         element_info = await page.evaluate("""(element) => {
@@ -975,18 +1046,12 @@ class ModelYearScraper:
                         if (element_info['tagName'] == 'LI' and 
                             element_info['textContent'] == option_text and 
                             element_info['isVisible']):
-                            
-                            logger.info(f"Found matching element:")
-                            logger.info(f"- Tag: {element_info['tagName']}")
-                            logger.info(f"- Text: {element_info['textContent']}")
-                            logger.info(f"- Class: {element_info['className']}")
-                            logger.info(f"- Parent: {element_info['parentElement']['tagName']} (class: {element_info['parentElement']['className']})")
+
                             
                             # Ensure element is in view and click it
                             await element.scroll_into_view_if_needed()
                             await element.click()
                             option_found = True
-                            logger.info(f"Successfully clicked option using selector: {selector}")
                             break
                         else:
                             logger.info(f"Found element but it doesn't match our criteria: {element_info}")
@@ -1076,12 +1141,9 @@ class ModelYearScraper:
             mappings = self.system_mappings[make_key]
             logger.info(f"Found system mappings for {make_key}: {mappings}")
             
-            # First, take a screenshot of the starting state
-            await page.screenshot(path=f"debug_info/before_systems_{manufacturer}_{model}_{year_or_chassis}.png")
-            
             # Check what system options are available on the page
             system_selector = "input[placeholder='System']"
-            system_element = await page.wait_for_selector(system_selector, timeout=5000)
+            system_element = await page.wait_for_selector(system_selector, timeout=2000)
             if not system_element:
                 logger.warning("System field not found")
                 return adas_results
@@ -1098,7 +1160,7 @@ class ModelYearScraper:
                     .map(el => el.textContent.trim())
                     .filter(text => text.length > 0); // Non-empty text
             }""")
-            logger.info(f"Available system options in dropdown: {available_systems}")
+
             
             # Close the dropdown by clicking elsewhere
             await page.keyboard.press("Escape")
@@ -1114,61 +1176,73 @@ class ModelYearScraper:
             for system_type, system_options in mappings.items():
                 if system_options == ["N/A"]:
                     continue
-                    
+                
+                # Create a list to store all matching options for this system type
+                matching_options = []
                 for option in system_options:
                     for available_system in available_systems:
                         # Check for exact match or partial match
                         if option == available_system or option in available_system or available_system in option:
-                            available_system_mapping[system_type] = option
-                            logger.info(f"Mapped {system_type} to available system: {option}")
-                            break
+                            matching_options.append(available_system)
+                            logger.info(f"Found matching option for {system_type}: {available_system}")
+                
+                if matching_options:
+                    available_system_mapping[system_type] = matching_options
             
             logger.info(f"Available system mappings: {available_system_mapping}")
             
-            # Process only the available mapped systems
-            for system_type, system_option in available_system_mapping.items():
+            # Process each system type and try each of its possible options
+            for system_type, system_options in available_system_mapping.items():
                 try:
-                    logger.info(f"Processing available system type: {system_type} with option: {system_option}")
-                    
-                    # Use our improved select_system method
-                    if await self.select_system(page, system_option):
-                        logger.info(f"Successfully selected system: {system_option}")
+                    # Try each option for this system type
+                    for system_option in system_options:
+                        logger.info(f"Processing system type: {system_type} with option: {system_option}")
                         
-                        # Wait for calibration type to appear
-                        await page.wait_for_timeout(5000)  # Give more time
-                        
-                        # Take a screenshot after selection for debugging
-                        await page.screenshot(path=f"debug_info/after_select_{system_option}.png")
-                        
-                        # Look for calibration type indicators with retries
-                        calibration_type = None
-                        for attempt in range(3):  # Try up to 3 times
-                            calibration_type = await self.get_calibration_type(page)
-                            if calibration_type:
-                                break
-                            logger.info(f"Calibration type not found, retry {attempt+1}/3")
-                            await page.wait_for_timeout(1000)  # Wait a bit between retries
-                        
-                        if calibration_type:
-                            logger.info(f"Detected calibration type: {calibration_type}")
+                        # Use our improved select_system method
+                        if await self.select_system(page, system_option):
+                            logger.info(f"Successfully selected system: {system_option}")
                             
-                            # If static is in the calibration type, try to get CSC model
-                            if "Static" in calibration_type:
-                                # Look for CSC model in the page
-                                csc_model = await self.get_csc_code(page)
-                                if csc_model:
-                                    logger.info(f"Found CSC model: {csc_model}")
-                                    adas_results[system_type] = csc_model
+                            # Wait for calibration type to appear
+                            await page.wait_for_timeout(1000)  # Give more time
+                            
+                            # Take a screenshot after selection for debugging
+                            await page.screenshot(path=f"debug_info/after_select_{system_option}.png")
+                            
+                            # Look for calibration type indicators with retries
+                            calibration_type = None
+                            for attempt in range(3):  # Try up to 3 times
+                                calibration_type = await self.get_calibration_type(page)
+                                if calibration_type:
+                                    break
+                                logger.info(f"Calibration type not found, retry {attempt+1}/3")
+                                await page.wait_for_timeout(1000)  # Wait a bit between retries
+                            
+                            if calibration_type:
+                                logger.info(f"Detected calibration type: {calibration_type}")
+                                
+                                # If static is in the calibration type, try to get CSC model
+                                if "Static" in calibration_type:
+                                    # Look for CSC model in the page
+                                    csc_model = await self.get_csc_code(page)
+                                    if csc_model:
+                                        logger.info(f"Found CSC model: {csc_model}")
+                                        adas_results[system_type] = csc_model
+                                    else:
+                                        logger.info("No CSC model found, returning calibration type")
+                                        adas_results[system_type] = calibration_type
                                 else:
-                                    logger.info("No CSC model found, returning calibration type")
+                                    # For dynamic, just return the calibration type
                                     adas_results[system_type] = calibration_type
+                                
+                                # If we successfully processed this option, break the loop for this system type
+                                break
                             else:
-                                # For dynamic, just return the calibration type
-                                adas_results[system_type] = calibration_type
-                        else:
-                            logger.warning(f"No calibration type found for system: {system_option}")
-                    else:
-                        logger.warning(f"Failed to select system: {system_option}")
+                                logger.warning(f"No calibration type found for system: {system_option}")
+                            continue
+                            
+                    logger.warning(f"Failed to select system: {system_option}")
+                    continue
+                    
                 except Exception as e:
                     logger.error(f"Error processing system option '{system_option}': {e}")
                     continue
@@ -1217,7 +1291,6 @@ class ModelYearScraper:
                 try:
                     # Navigate to the target URL
                     await self.page.goto("https://www.maxisysadas.com/getCoverage.jspx")
-                    await self.capture_debug_info(self.page, f"{manufacturer}_initial_page_load")
                     
                     # Wait for page to be fully loaded
                     await self.page.wait_for_load_state("networkidle")
@@ -1519,7 +1592,7 @@ class ModelYearScraper:
                     try:
                         year_header_text = year_header["text"]
                         header_selector = f"//*[contains(@class, '{year_header['className']}') and contains(text(), '{year_header_text}')]"
-                        header_element = await page.wait_for_selector(header_selector, timeout=2000)
+                        header_element = await page.wait_for_selector(header_selector, timeout=1000)
                         
                         if header_element:
                             await header_element.click()
@@ -1559,7 +1632,7 @@ class ModelYearScraper:
                 return false;
             }""", year_or_chassis)
             
-            logger.info(f"Is table view with years: {is_table_view}")
+
             
             if is_table_view:
                 # Try clicking on the year in the table view
@@ -1567,10 +1640,10 @@ class ModelYearScraper:
                 
                 # Try different selectors for the year
                 selectors = [
+                    f".dropbox.level3 li:has-text('{year_or_chassis}')",
                     f"table td:has-text('{year_or_chassis}')",
                     f"div.year-list li:has-text('{year_or_chassis}')",
                     f".year-column li:has-text('{year_or_chassis}')",
-                    f".dropbox.level3 li:has-text('{year_or_chassis}')",
                     f"//td[contains(text(), '{year_or_chassis}')]",
                     f"//li[contains(text(), '{year_or_chassis}')]",
                     f"//*[text()='{year_or_chassis}']"
@@ -1646,7 +1719,7 @@ class ModelYearScraper:
                 try:
                     # Look for System input (similar to Product Type selector)
                     system_selector = "input[placeholder='System']"
-                    system_element = await page.wait_for_selector(system_selector, timeout=5000)
+                    system_element = await page.wait_for_selector(system_selector, timeout=2000)
                     if system_element:
                         logger.info("System field is visible")
                         return True
@@ -1671,7 +1744,7 @@ class ModelYearScraper:
                 try:
                     # Look for System input or dropdown
                     system_selector = "input[placeholder='System']"
-                    system_element = await page.wait_for_selector(system_selector, timeout=5000)
+                    system_element = await page.wait_for_selector(system_selector, timeout=2000)
                     if system_element:
                         logger.info("System field is visible")
                         return True
@@ -1698,7 +1771,7 @@ class ModelYearScraper:
             
             # Click the System field to open the dropdown
             system_selector = "input[placeholder='System']"
-            system_element = await page.wait_for_selector(system_selector, timeout=5000)
+            system_element = await page.wait_for_selector(system_selector, timeout=2000)
             if not system_element:
                 logger.warning("System field not found")
                 return False
@@ -1708,119 +1781,29 @@ class ModelYearScraper:
             logger.info("Clicked System dropdown")
             await page.wait_for_timeout(1000)  # Wait for dropdown to open
 
-            # Method 1: Try clicking directly using our precision targeting method
-            # This is specifically designed for ACC and LDW which are known options
+            # For ADAS systems, use precision targeting method first
             result = await self._try_select_specific_system(page, system_name)
             if result:
                 logger.info(f"Precision targeting method successfully selected {system_name}")
                 await page.wait_for_timeout(2000)  # Wait for selection to take effect
                 return True
-                
-            # Method 2: Using direct selector with text
+            
+            # If precision targeting failed, try one backup method with direct selector
             try:
-                logger.info(f"Trying direct selector: li:text-is('{system_name}')")
+                logger.info(f"Precision targeting failed, trying direct selector: li:text-is('{system_name}')")
                 await page.click(f"li:text-is('{system_name}')")
                 logger.info(f"Direct selector successfully selected {system_name}")
                 await page.wait_for_timeout(2000)
                 return True
             except Exception as e:
-                logger.debug(f"Direct selector failed: {e}")
-                
-            # Method 3: Using contains selector
-            try:
-                logger.info(f"Trying contains selector: li:text-contains('{system_name}')")
-                await page.click(f"li:text-contains('{system_name}')")
-                logger.info(f"Contains selector successfully selected {system_name}")
-                await page.wait_for_timeout(2000)
-                return True
-            except Exception as e:
-                logger.debug(f"Contains selector failed: {e}")
-                
-            # Method 4: Using XPath
-            try:
-                logger.info(f"Trying XPath selector: //div[contains(@class, 'dropbox')]//li[text()='{system_name}']")
-                await page.click(f"//div[contains(@class, 'dropbox')]//li[text()='{system_name}']")
-                logger.info(f"XPath selector successfully selected {system_name}")
-                await page.wait_for_timeout(2000)
-                return True
-            except Exception as e:
-                logger.debug(f"XPath selector failed: {e}")
-                
-            # Method 5: Using JavaScript with nearby context
-            try:
-                logger.info("Trying JavaScript with nearby context")
-                result = await page.evaluate(f"""() => {{
-                    // Get the System input
-                    const systemInput = document.querySelector("input[placeholder='System']");
-                    if (!systemInput) return false;
-                    
-                    // Look for dropbox nearby
-                    const dropbox = systemInput.closest('.container').querySelector('.dropbox');
-                    if (!dropbox) return false;
-                    
-                    // Find the target option
-                    const options = Array.from(dropbox.querySelectorAll('li'));
-                    const targetOption = options.find(el => 
-                        el.textContent.trim() === "{system_name}" || 
-                        el.textContent.includes("{system_name}")
-                    );
-                    
-                    if (targetOption) {{
-                        // Click it via JavaScript
-                        targetOption.click();
-                        return true;
-                    }}
-                    return false;
-                }}""")
-                
-                if result:
-                    logger.info(f"JavaScript with nearby context successfully selected {system_name}")
-                    await page.wait_for_timeout(2000)
-                    return True
-                else:
-                    logger.debug("JavaScript with nearby context returned false")
-            except Exception as e:
-                logger.debug(f"JavaScript with nearby context failed: {e}")
-                
-            # Method 6: Using simplified JavaScript for short-text options
-            try:
-                logger.info("Trying simplified JavaScript for short-text options")
-                result = await page.evaluate(f"""() => {{
-                    // Get all visible list items that are likely to be our options
-                    const items = Array.from(document.querySelectorAll('li'))
-                        .filter(el => el.offsetParent !== null && el.textContent.trim().length < 10);
-                    
-                    // Look for one that matches our system name
-                    const targetItems = items.filter(el => 
-                        el.textContent.trim() === "{system_name}" || 
-                        el.textContent.includes("{system_name}")
-                    );
-                    
-                    if (targetItems.length > 0) {{
-                        targetItems[0].click();
-                        return true;
-                    }}
-                    return false;
-                }}""")
-                
-                if result:
-                    logger.info(f"Simplified JavaScript successfully selected {system_name}")
-                    await page.wait_for_timeout(2000)
-                    return True
-                else:
-                    logger.debug("Simplified JavaScript returned false")
-            except Exception as e:
-                logger.debug(f"Simplified JavaScript failed: {e}")
-            
-            # All methods failed
-            logger.warning(f"All methods failed to select system: {system_name}")
-            return False
+                logger.warning(f"Failed to select system '{system_name}' with all methods")
+                return False
             
         except Exception as e:
             logger.error(f"Error selecting system '{system_name}': {e}")
             await self.capture_debug_info(page, f"system_selection_error_{system_name}")
             return False
-            
+
     async def _try_select_specific_system(self, page, system_name):
         """Helper method to select specific systems like ACC and LDW."""
         try:
@@ -1867,17 +1850,11 @@ class ModelYearScraper:
         """Detect calibration type (Static, Dynamic, or both)."""
         try:
             logger.info("Detecting calibration type...")
-            
-            # Take screenshot for debugging
-            await page.screenshot(path="debug_info/calibration_type_detection.png")
+
             
             # Check if there's a combined calibration type (Static+Dynamic)
             combined_selectors = [
-                "text='Static Calibration+Dynamic Calibration'",
-                "text='Static+Dynamic'",
-                "text='Static Calibration + Dynamic Calibration'",
-                "//div[contains(text(), 'Static') and contains(text(), 'Dynamic')]",
-                "//h2[contains(text(), 'Static') and contains(text(), 'Dynamic')]"
+                "text='Static Calibration+Dynamic Calibration'"
             ]
             
             for selector in combined_selectors:
@@ -1896,27 +1873,19 @@ class ModelYearScraper:
             
             # First check for explicit text indicating calibration type
             static_selectors = [
-                "text='Static Calibration'",
-                "text='Static'",
-                ".calibration-title:has-text('Static')",
-                "h2:has-text('Static')",
-                "//h2[contains(text(), 'Static')]",
-                "//div[contains(text(), 'Static Calibration')]"
+                "text='Static Calibration'"
+
             ]
             
             dynamic_selectors = [
-                "text='Dynamic Calibration'",
-                "text='Dynamic'",
-                ".calibration-title:has-text('Dynamic')",
-                "h2:has-text('Dynamic')",
-                "//h2[contains(text(), 'Dynamic')]",
-                "//div[contains(text(), 'Dynamic Calibration')]"
+                "text='Dynamic Calibration'"
+
             ]
             
             # Check for static
             for selector in static_selectors:
                 try:
-                    element = await page.wait_for_selector(selector, timeout=1000)
+                    element = await page.wait_for_selector(selector, timeout=100)
                     if element:
                         found_static = True
                         logger.info("Found Static Calibration indicator")
@@ -1927,7 +1896,7 @@ class ModelYearScraper:
             # Check for dynamic
             for selector in dynamic_selectors:
                 try:
-                    element = await page.wait_for_selector(selector, timeout=1000)
+                    element = await page.wait_for_selector(selector, timeout=100)
                     if element:
                         found_dynamic = True
                         logger.info("Found Dynamic Calibration indicator")
@@ -1946,19 +1915,7 @@ class ModelYearScraper:
             elif found_dynamic:
                 logger.info("Found only Dynamic Calibration")
                 return "Dynamic Calibration"
-            
-            # If we couldn't find direct text, check the entire page content
-            page_text = await page.evaluate("""() => document.body.textContent""")
-            
-            if "static" in page_text.lower() and "dynamic" in page_text.lower():
-                logger.info("Found both Static and Dynamic Calibration in page text")
-                return "Static Calibration+Dynamic Calibration"
-            elif "static" in page_text.lower():
-                logger.info("Found Static Calibration in page text")
-                return "Static Calibration"
-            elif "dynamic" in page_text.lower():
-                logger.info("Found Dynamic Calibration in page text")
-                return "Dynamic Calibration"
+
             
             # Check if there's any calibration diagram visible
             diagram_visible = await page.evaluate("""() => {
@@ -1981,37 +1938,15 @@ class ModelYearScraper:
     async def get_csc_code(self, page):
         """Extract CSC model code from the page using OCR if necessary."""
         try:
-            logger.info("Looking for CSC code in page...")
+            logger.info("Looking for CSC code in images...")
             
-            # First try to find CSC code in the text directly
-            csc_patterns = [
-                r'AUTEL-CSC\d{4}(?:/\d+)*',  # Matches AUTEL-CSC0601/24/01
-                r'CSC\d{4}(?:/\d+)*',        # Matches CSC0601/24/01
-                r'CSC\s*\d{4}(?:/\d+)*'      # Matches CSC 0601/24/01
-            ]
-            
-            # Check if the CSC code is directly in the page text
-            page_text = await page.evaluate("""() => document.body.textContent""")
-            
-            for pattern in csc_patterns:
-                matches = re.findall(pattern, page_text)
-                if matches:
-                    csc_code = matches[0]
-                    logger.info(f"Found CSC code in page text: {csc_code}")
-                    return csc_code
-            
-            logger.info("No CSC code found in page text, trying OCR on images...")
-            
-            # No direct text match, try OCR on images
-            # First, find all visible images that might contain calibration info
+            # Find all visible images that might contain calibration info
             images = await page.evaluate("""() => {
                 return Array.from(document.querySelectorAll('img'))
                     .filter(img => 
                         img.offsetParent !== null && 
-                        (img.src.includes('calibration') || 
-                         img.src.includes('adas') || 
-                         img.src.includes('CSC') ||
-                         img.src.includes('download1.auteltech.net'))
+                        !img.src.includes('coverage-p1.jpg') &&  // Exclude coverage-p1.jpg
+                        (img.src.includes('download1.auteltech.net'))
                     )
                     .map(img => ({
                         src: img.src,
@@ -2021,20 +1956,10 @@ class ModelYearScraper:
                     }));
             }""")
             
-            logger.info(f"Found {len(images)} potential calibration images: {images}")
-            
-            # Import the necessary libraries for OCR
-            try:
-                import pytesseract
-                from PIL import Image
-                import io
-                import requests
-                
-                # Make sure Tesseract path is set
-                pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-            except ImportError as e:
-                logger.error(f"Failed to import OCR libraries: {e}")
-                return None
+            def sanitize_filename(csc_code):
+                """Convert CSC code to a valid filename by replacing invalid characters."""
+                # Replace forward slashes and other invalid characters with underscores
+                return re.sub(r'[/\\:*?"<>|]', '_', csc_code)
             
             # Process each image
             for img_info in images:
@@ -2051,22 +1976,29 @@ class ModelYearScraper:
                     # First find the image element
                     img_element = await page.wait_for_selector(f"img[src='{img_url}']", timeout=2000)
                     if img_element:
-                        # Save screenshot
-                        screenshot_path = os.path.join("debug_info", f"calibration_image_{hash(img_url)}.png")
-                        await img_element.screenshot(path=screenshot_path)
-                        logger.info(f"Saved image screenshot to {screenshot_path}")
-                        
                         # Perform OCR on the screenshot
-                        img = Image.open(screenshot_path)
+                        img = Image.open(io.BytesIO(await img_element.screenshot()))
                         text = pytesseract.image_to_string(img)
-                        logger.info(f"OCR text from image: {text}")
                         
                         # Search for CSC code patterns in the OCR text
+                        csc_patterns = [
+                            r'AUTEL-CSC\d{4}(?:/\d+)*',  # Matches AUTEL-CSC0601/24/01
+                            r'CSC\d{4}(?:/\d+)*',        # Matches CSC0601/24/01
+                            r'CSC\s*\d{4}(?:/\d+)*'      # Matches CSC 0601/24/01
+                        ]
+                        
                         for pattern in csc_patterns:
                             matches = re.findall(pattern, text)
                             if matches:
                                 csc_code = matches[0]
-                                logger.info(f"Found CSC code in image via OCR: {csc_code}")
+                                # Sanitize the CSC code for use as filename
+                                safe_filename = sanitize_filename(csc_code)
+                                image_path = os.path.join("debug_info", f"{safe_filename}.png")
+                                if not os.path.exists(image_path):  # Only save if it doesn't already exist
+                                    # Ensure debug_info directory exists
+                                    os.makedirs("debug_info", exist_ok=True)
+                                    img.save(image_path)
+                                    logger.info(f"Saved calibration image as {safe_filename}.png")
                                 return csc_code
                     
                     # If screenshot method failed, try downloading the image
@@ -2074,22 +2006,23 @@ class ModelYearScraper:
                         # Download the image
                         response = requests.get(img_url, stream=True, timeout=5)
                         if response.status_code == 200:
-                            # Save the image locally
-                            img_path = os.path.join("debug_info", f"downloaded_image_{hash(img_url)}.png")
-                            with open(img_path, 'wb') as f:
-                                f.write(response.content)
-                            
-                            # Perform OCR
-                            img = Image.open(img_path)
+                            # Perform OCR on downloaded image
+                            img = Image.open(io.BytesIO(response.content))
                             text = pytesseract.image_to_string(img)
-                            logger.info(f"OCR text from downloaded image: {text}")
                             
                             # Search for CSC code patterns in the OCR text
                             for pattern in csc_patterns:
                                 matches = re.findall(pattern, text)
                                 if matches:
                                     csc_code = matches[0]
-                                    logger.info(f"Found CSC code in downloaded image via OCR: {csc_code}")
+                                    # Sanitize the CSC code for use as filename
+                                    safe_filename = sanitize_filename(csc_code)
+                                    image_path = os.path.join("debug_info", f"{safe_filename}.png")
+                                    if not os.path.exists(image_path):  # Only save if it doesn't already exist
+                                        # Ensure debug_info directory exists
+                                        os.makedirs("debug_info", exist_ok=True)
+                                        img.save(image_path)
+                                        logger.info(f"Saved calibration image as {safe_filename}.png")
                                     return csc_code
                     except Exception as e:
                         logger.error(f"Error downloading image for OCR: {e}")
@@ -2099,35 +2032,8 @@ class ModelYearScraper:
                     logger.error(f"Error processing image for OCR: {e}")
                     continue
             
-            # Final attempt - look for text next to images that might contain CSC codes
-            try:
-                csc_code = await page.evaluate("""() => {
-                    // Look for elements that might contain CSC codes
-                    const elements = document.querySelectorAll('.swiper-slide, .calibration-info, .csc-code');
-                    
-                    for (const el of elements) {
-                        const text = el.textContent;
-                        if (text.includes('CSC') || text.includes('AUTEL')) {
-                            // Look for patterns like CSC0601
-                            const match = text.match(/AUTEL-CSC\\d{4}(\\/\\d+)*/);
-                            if (match) return match[0];
-                            
-                            const match2 = text.match(/CSC\\d{4}(\\/\\d+)*/);
-                            if (match2) return match2[0];
-                        }
-                    }
-                    
-                    return null;
-                }""")
-                
-                if csc_code:
-                    logger.info(f"Found CSC code in element text: {csc_code}")
-                    return csc_code
-            except Exception as e:
-                logger.error(f"Error in JavaScript evaluation: {e}")
-            
             # If we get here, no CSC code was found
-            logger.warning("No CSC code found in page text or images")
+            logger.warning("No CSC code found in images")
             return None
             
         except Exception as e:

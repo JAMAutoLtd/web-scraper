@@ -1,14 +1,14 @@
 {
   "Acura": {
-    "adas_front_radar": ["ACC"],
+    "adas_front_radar": ["ACC_2 door", "ACC_4 door", "ACC"],
     "adas_blind_spot_monitor": ["N/A"],
-    "adas_windshield_camera": ["LDW"],
+    "adas_windshield_camera": ["LDW_FCW Camera", "LDW_Multipurpose Camera", "LDW"],
     "adas_360_camera": ["Multi View Camera System"]
   },
   "Honda": {
-    "adas_front_radar": ["ACC"],
+    "adas_front_radar": ["ACC_2 door", "ACC_4 door", "ACC"],
     "adas_blind_spot_monitor": ["N/A"],
-    "adas_windshield_camera": ["LDW"],
+    "adas_windshield_camera": ["LDW_FCW Camera", "LDW_Multipurpose Camera", "LDW"],
     "adas_360_camera": ["Multi View Camera System"]
   },
   "Volkswagen": {
@@ -17,11 +17,101 @@
     "adas_360_camera": ["6C - Camera System Rear View", "Camera System Rear View-AVM"],
     "adas_windshield_camera": ["A5 - Front sensor for drivers assistant systems", "5C - Lane Assist"]
   },
+  "BMW": {
+    "adas_front_radar": ["Radar sensors: Dynamic start-up", "Radar sensors: Dynamic start-up", "Front radar sensor: Start-up", "Radar sensors: Static start-up", "ACC: Long-range sensor setting", "ACC sensor: Start-up", "Adjust ACC sensor"],
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_360_camera": ["N/A"],
+    "adas_windshield_camera": ["N/A"]
+  },
   "Audi": {
     "adas_front_radar": ["13 - Adaptive Cruise Control"],
     "adas_blind_spot_monitor": ["3C - Lane change assistance"],
     "adas_360_camera": ["6C - Camera System Rear View", "Camera System Rear View-AVM"],
     "adas_windshield_camera": ["A5 - Front sensor for drivers assistant systems", "5C - Lane Assist"]
+  },
+  "Buick": {
+    "adas_front_radar": ["N/A"],
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_360_camera": ["N/A"],
+    "adas_windshield_camera": ["N/A"]
+  },
+  "Cadillac": {
+    "adas_front_radar": ["N/A"],
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_360_camera": ["N/A"],
+    "adas_windshield_camera": ["N/A"]
+  },
+  "Chevrolet": {
+    "adas_front_radar": ["N/A"],
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_360_camera": ["N/A"],
+    "adas_windshield_camera": ["N/A"]
+  },
+  "Chrysler": {
+    "adas_front_radar": ["N/A"],
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_360_camera": ["N/A"],
+    "adas_windshield_camera": ["N/A"]
+  },
+  "Dodge": {
+    "adas_front_radar": ["N/A"],
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_360_camera": ["N/A"],
+    "adas_windshield_camera": ["N/A"]
+  },
+  "Fiat": {
+    "adas_front_radar": ["ACC -- Adaptive Cruise Control"],
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_360_camera": ["N/A"],
+    "adas_windshield_camera": ["HALF -- Haptical Lane Feedback"]
+  },
+  "Ford": {
+    "adas_front_radar": ["N/A"],
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_360_camera": ["N/A"],
+    "adas_windshield_camera": ["N/A"]
+  },
+  "Genesis": {
+    "adas_blind_spot_monitor": ["BCW(Blind-Spot Collision Warning)", "RCR_L(Rear Corner Radar-Left)", "BSD-L(Blind Spot Detection-L)", "BSD(Blind Spot Detection)"],
+    "adas_windshield_camera": ["F-CMR(Front View Camera)", "LDWD(Lane Departure Warning System)", "MFC(Multi Function Camera)"],
+    "adas_front_radar": ["FCA(Forward Collision-Avoidance Assist)", "FR(Front Radar)", "SCC(Smart Cruise Control)"],
+    "adas_360_camera": ["ADAS_P (Advanced Driver Assistance Systems_Parking)"]
+  },
+  "GMC": {
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_windshield_camera": ["N/A"],
+    "adas_front_radar": ["N/A"],
+    "adas_360_camera": ["N/A"]
+  },
+  "Jaguar": {
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_windshield_camera": ["N/A"],
+    "adas_front_radar": ["N/A"],
+    "adas_360_camera": ["N/A"]
+  },
+  "Jeep": {
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_windshield_camera": ["N/A"],
+    "adas_front_radar": ["N/A"],
+    "adas_360_camera": ["N/A"]
+  },
+  "Land Rover": {
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_windshield_camera": ["N/A"],
+    "adas_front_radar": ["N/A"],
+    "adas_360_camera": ["N/A"]
+  },
+  "Lincoln": {
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_windshield_camera": ["N/A"],
+    "adas_front_radar": ["N/A"],
+    "adas_360_camera": ["N/A"]
+  },
+  "MINI": {
+    "adas_front_radar": ["Radar sensors: Dynamic start-up", "Radar sensors: Dynamic start-up", "Front radar sensor: Start-up", "Radar sensors: Static start-up", "ACC: Long-range sensor setting", "ACC sensor: Start-up", "Adjust ACC sensor"],
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_360_camera": ["N/A"],
+    "adas_windshield_camera": ["N/A"]
   },
   "Hyundai": {
     "adas_blind_spot_monitor": ["BCW(Blind-Spot Collision Warning)", "RCR_L(Rear Corner Radar-Left)", "BSD-L(Blind Spot Detection-L)", "BSD(Blind Spot Detection)"],

@@ -11,7 +11,55 @@
           "E87",
           "E82",
           "E81"
-        ]
+        ],
+        "F52": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F40": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F21": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F20": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E88": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E87": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E82": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E81": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "2 Series": {
         "chassis": [
@@ -25,7 +73,67 @@
           "F44",
           "F23",
           "F22"
-        ]
+        ],
+        "U06": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G87": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G42": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F87": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F74": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F46": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F45": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F44": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F23": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F22": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "3 Series": {
         "chassis": [
@@ -43,7 +151,91 @@
           "E92",
           "E91",
           "E90"
-        ]
+        ],
+        "G81": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G80": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G28": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G21": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G20": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F80": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F35": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F34": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F31": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F30": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E93": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E92": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E91": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E90": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "4 Series": {
         "chassis": [
@@ -57,7 +249,67 @@
           "F36",
           "F33",
           "F32"
-        ]
+        ],
+        "G83": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G82": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G26": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G23": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G22": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F83": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F82": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F36": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F33": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F32": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "5 Series": {
         "chassis": [
@@ -74,7 +326,85 @@
           "F07",
           "E61",
           "E60"
-        ]
+        ],
+        "G68": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G61": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G60": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G38": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G31": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G30": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F90": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F18": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F11": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F10": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F07": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E61": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E60": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "6 Series": {
         "chassis": [
@@ -84,7 +414,43 @@
           "F06",
           "E64",
           "E63"
-        ]
+        ],
+        "G32": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F13": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F12": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F06": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E64": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E63": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "7 Series": {
         "chassis": [
@@ -99,7 +465,73 @@
           "E67",
           "E66",
           "E65"
-        ]
+        ],
+        "G70": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G12": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G11": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F04": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F03": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F02": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F01": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E68": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E67": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E66": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E65": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "8 Series": {
         "chassis": [
@@ -109,7 +541,43 @@
           "F93",
           "F92",
           "F91"
-        ]
+        ],
+        "G16": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G15": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G14": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F93": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F92": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F91": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "I Series": {
         "chassis": [
@@ -117,7 +585,31 @@
           "I15",
           "I12",
           "I01"
-        ]
+        ],
+        "I20": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "I15": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "I12": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "I01": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "X Series": {
         "chassis": [
@@ -151,13 +643,205 @@
           "E72",
           "E71",
           "E70"
-        ]
+        ],
+        "U12": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "U11": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "U10": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "M12": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G45": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G18": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G09": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G08": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G07": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G06": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G05": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G02": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "G01": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F98": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F97": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F96": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F95": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F86": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F85": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F49": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F48": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F39": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F26": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F25": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F16": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "F15": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E84": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E72": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E71": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E70": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       },
       "Z Series": {
         "chassis": [
           "G29",
           "E89"
-        ]
+        ],
+        "G29": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        },
+        "E89": {
+          "adas_blind_spot_monitor": "N/A",
+          "adas_windshield_camera": "N/A",
+          "adas_front_radar": "N/A",
+          "adas_360_camera": "N/A"
+        }
       }
     }
   }
