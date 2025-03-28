@@ -1,28 +1,58 @@
-Acura OR Honda
+Acura
 	adas_front_radar: ACC
 	adas_blind_spot_monitor: N/A
 	adas_windshield_camera: LDW
 	adas_360_camera: Multi View Camera System
 
-Audi OR Volkswagen
+Honda
+	adas_front_radar: ACC
+	adas_blind_spot_monitor: N/A
+	adas_windshield_camera: LDW
+	adas_360_camera: Multi View Camera System
+
+Volkswagen
 	adas_front_radar: 13 - Adaptive Cruise Control
 	adas_blind_spot_monitor: 3C - Lane change assistance
 	adas_360_camera: 6C - Camera System Rear View, Camera System Rear View-AVM
 	adas_windshield_camera: A5 - Front sensor for drivers assistant systems, 5C - Lane Assist
 
-Hyundai OR Kia
+
+Audi
+	adas_front_radar: 13 - Adaptive Cruise Control
+	adas_blind_spot_monitor: 3C - Lane change assistance
+	adas_360_camera: 6C - Camera System Rear View, Camera System Rear View-AVM
+	adas_windshield_camera: A5 - Front sensor for drivers assistant systems, 5C - Lane Assist
+
+Hyundai
 	adas_blind_spot_monitor: BCW(Blind-Spot Collision Warning), RCR_L(Rear Corner Radar-Left), BSD-L(Blind Spot Detection-L), BSD(Blind Spot Detection)
 	adas_windshield_camera: F-CMR(Front View Camera), LDWD(Lane Departure Warning System), MFC(Multi Function Camera)
 	adas_front_radar: FCA(Forward Collision-Avoidance Assist), FR(Front Radar), SCC(Smart Cruise Control)
 	adas_360_camera: ADAS_P (Advanced Driver Assistance Systems_Parking)
 
-Infiniti OR Nissan
+Kia
+	adas_blind_spot_monitor: BCW(Blind-Spot Collision Warning), RCR_L(Rear Corner Radar-Left), BSD-L(Blind Spot Detection-L), BSD(Blind Spot Detection)
+	adas_windshield_camera: F-CMR(Front View Camera), LDWD(Lane Departure Warning System), MFC(Multi Function Camera)
+	adas_front_radar: FCA(Forward Collision-Avoidance Assist), FR(Front Radar), SCC(Smart Cruise Control)
+	adas_360_camera: ADAS_P (Advanced Driver Assistance Systems_Parking)
+
+Nissan
 	adas_360_camera: N/A
 	adas_front_radar: ICC/ADAS, Laser/radar
 	adas_windshield_camera: Lane camera
 	adas_blind_spot_monitor: N/A
 
-Toyota OR Lexus
+Infiniti
+	adas_360_camera: N/A
+	adas_front_radar: ICC/ADAS, Laser/radar
+	adas_windshield_camera: Lane camera
+	adas_blind_spot_monitor: N/A
+
+Toyota	adas_blind_spot_monitor: BSM
+	adas_windshield_camera: LDW
+	adas_front_radar: ACC
+	adas_360_camera: AVM_Special
+
+Lexus
 	adas_blind_spot_monitor: BSM
 	adas_windshield_camera: LDW
 	adas_front_radar: ACC

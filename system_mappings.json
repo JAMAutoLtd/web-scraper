@@ -1,0 +1,116 @@
+{
+  "Acura": {
+    "adas_front_radar": ["ACC"],
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_windshield_camera": ["LDW"],
+    "adas_360_camera": ["Multi View Camera System"]
+  },
+  "Honda": {
+    "adas_front_radar": ["ACC"],
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_windshield_camera": ["LDW"],
+    "adas_360_camera": ["Multi View Camera System"]
+  },
+  "Volkswagen": {
+    "adas_front_radar": ["13 - Adaptive Cruise Control"],
+    "adas_blind_spot_monitor": ["3C - Lane change assistance"],
+    "adas_360_camera": ["6C - Camera System Rear View", "Camera System Rear View-AVM"],
+    "adas_windshield_camera": ["A5 - Front sensor for drivers assistant systems", "5C - Lane Assist"]
+  },
+  "Audi": {
+    "adas_front_radar": ["13 - Adaptive Cruise Control"],
+    "adas_blind_spot_monitor": ["3C - Lane change assistance"],
+    "adas_360_camera": ["6C - Camera System Rear View", "Camera System Rear View-AVM"],
+    "adas_windshield_camera": ["A5 - Front sensor for drivers assistant systems", "5C - Lane Assist"]
+  },
+  "Hyundai": {
+    "adas_blind_spot_monitor": ["BCW(Blind-Spot Collision Warning)", "RCR_L(Rear Corner Radar-Left)", "BSD-L(Blind Spot Detection-L)", "BSD(Blind Spot Detection)"],
+    "adas_windshield_camera": ["F-CMR(Front View Camera)", "LDWD(Lane Departure Warning System)", "MFC(Multi Function Camera)"],
+    "adas_front_radar": ["FCA(Forward Collision-Avoidance Assist)", "FR(Front Radar)", "SCC(Smart Cruise Control)"],
+    "adas_360_camera": ["ADAS_P (Advanced Driver Assistance Systems_Parking)"]
+  },
+  "Kia": {
+    "adas_blind_spot_monitor": ["BCW(Blind-Spot Collision Warning)", "RCR_L(Rear Corner Radar-Left)", "BSD-L(Blind Spot Detection-L)", "BSD(Blind Spot Detection)"],
+    "adas_windshield_camera": ["F-CMR(Front View Camera)", "LDWD(Lane Departure Warning System)", "MFC(Multi Function Camera)"],
+    "adas_front_radar": ["FCA(Forward Collision-Avoidance Assist)", "FR(Front Radar)", "SCC(Smart Cruise Control)"],
+    "adas_360_camera": ["ADAS_P (Advanced Driver Assistance Systems_Parking)"]
+  },
+  "Nissan": {
+    "adas_360_camera": ["N/A"],
+    "adas_front_radar": ["ICC/ADAS", "Laser/radar"],
+    "adas_windshield_camera": ["Lane camera"],
+    "adas_blind_spot_monitor": ["N/A"]
+  },
+  "Infiniti": {
+    "adas_360_camera": ["N/A"],
+    "adas_front_radar": ["ICC/ADAS", "Laser/radar"],
+    "adas_windshield_camera": ["Lane camera"],
+    "adas_blind_spot_monitor": ["N/A"]
+  },
+  "Toyota": {
+    "adas_blind_spot_monitor": ["BSM"],
+    "adas_windshield_camera": ["LDW"],
+    "adas_front_radar": ["ACC"],
+    "adas_360_camera": ["AVM_Special"]
+  },
+  "Lexus": {
+    "adas_blind_spot_monitor": ["BSM"],
+    "adas_windshield_camera": ["LDW"],
+    "adas_front_radar": ["ACC"],
+    "adas_360_camera": ["AVM_Special"]
+  },
+  "Maserati": {
+    "adas_blind_spot_monitor": ["CVPM(Central vision processing module)"],
+    "adas_windshield_camera": ["HALF(Haptic lane feedback module)"],
+    "adas_front_radar": ["DASM(Driver assistance system module)"],
+    "adas_360_camera": ["CVPM(Central vision processing module)"]
+  },
+  "Mazda": {
+    "adas_blind_spot_monitor": ["FSRL", "BSM"],
+    "adas_windshield_camera": ["FSC_********_North America", "FSC"],
+    "adas_front_radar": ["FR", "SBS/MRCC"],
+    "adas_360_camera": ["VMC"]
+  },
+  "Mercedes": {
+    "adas_blind_spot_monitor": ["DISTRONIC"],
+    "adas_windshield_camera": ["Multifunction camera", "Night View Assist control unit"],
+    "adas_front_radar": ["Front radar sensor"],
+    "adas_360_camera": ["360 camera", "Reversing camera"]
+  },
+  "Mitsubishi": {
+    "adas_blind_spot_monitor": ["BSW"],
+    "adas_windshield_camera": ["FCM/LDW/AHB", "Lane Keep", "Front camera unit"],
+    "adas_front_radar": ["ACC/FCM", "LASER/RADAR"],
+    "adas_360_camera": ["Multi Around Monitor"]
+  },
+  "Porsche": {
+    "adas_blind_spot_monitor": ["Left front corner radar sensor", "Left Lane Change Assist 2(Slave)", "Right front corner radar sensor", "Right Lane Change Assist 1(Master)"],
+    "adas_windshield_camera": ["Assistance Systems - LDW"],
+    "adas_front_radar": ["ACC(Distance Sensor)"],
+    "adas_360_camera": ["Assistance Systems - AVM"]
+  },
+  "RAM": {
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_windshield_camera": ["N/A"],
+    "adas_front_radar": ["N/A"],
+    "adas_360_camera": ["N/A"]
+  },
+  "Subaru": {
+    "adas_blind_spot_monitor": ["BSM", "BSM(Hybrid)", "BSM(Outback)", "BSM(Wilderness)"],
+    "adas_windshield_camera": ["Eyesight", "Eyesight(Hybrid)", "Wide Angle Mono Camera"],
+    "adas_front_radar": ["N/A"],
+    "adas_360_camera": ["Front&Side Camera/Multi View Monitor"]
+  },
+  "Tesla": {
+    "adas_blind_spot_monitor": ["N/A"],
+    "adas_windshield_camera": ["DAS(Driver Assist)"],
+    "adas_front_radar": ["RADC(Center Radar)"],
+    "adas_360_camera": ["N/A"]
+  },
+  "Volvo": {
+    "adas_blind_spot_monitor": ["SODL (Side obstacle detection control module left)", "SODR (Side obstacle detection control module right)"],
+    "adas_windshield_camera": ["FLC2 (Forward Looking Camera 2)"],
+    "adas_front_radar": ["FLR (Forward Looking Radar)", "FSM (Forward Sensing Module)"],
+    "adas_360_camera": ["N/A"]
+  }
+} 

@@ -1,0 +1,39 @@
+{
+  "PORSCHE": {
+    "models": {
+      "911(991)": {
+        "years": []
+      },
+      "911(992)": {
+        "years": []
+      },
+      "92A - Cayenne(2011 to 2017)": {
+        "years": []
+      },
+      "970 - Panamera(up to MY 2017)": {
+        "years": []
+      },
+      "971 - Panamera(2017 to 2023)": {
+        "years": []
+      },
+      "9YA - Cayenne(from MY 2017)": {
+        "years": []
+      },
+      "Boxster/Cayman(981)": {
+        "years": []
+      },
+      "Boxster/Cayman(982)": {
+        "years": []
+      },
+      "Macan": {
+        "years": []
+      },
+      "Taycan(Y1A)": {
+        "years": []
+      },
+      "YA - Panamera(from MY 2023)": {
+        "years": []
+      }
+    }
+  }
+}
