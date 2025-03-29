@@ -1,6 +1,6 @@
 {
   "Acura": {
-    "adas_front_radar": ["ACC_2 door", "ACC_4 door", "ACC"],
+    "adas_front_radar": ["ACC", "ACC_2 door", "ACC_4 door"],
     "adas_blind_spot_monitor": ["N/A"],
     "adas_windshield_camera": ["LDW_FCW Camera", "LDW_Multipurpose Camera", "LDW"],
     "adas_360_camera": ["Multi View Camera System"]
@@ -18,7 +18,7 @@
     "adas_windshield_camera": ["A5 - Front sensor for drivers assistant systems", "5C - Lane Assist"]
   },
   "BMW": {
-    "adas_front_radar": ["Radar sensors: Dynamic start-up", "Radar sensors: Dynamic start-up", "Front radar sensor: Start-up", "Radar sensors: Static start-up", "ACC: Long-range sensor setting", "ACC sensor: Start-up", "Adjust ACC sensor"],
+    "adas_front_radar": ["KAFAS: Calibration","All-round vision camera: Check of the programming", "Radar sensors: Dynamic start-up", "Radar sensors: Dynamic start-up", "Front radar sensor: Start-up", "Radar sensors: Static start-up", "ACC: Long-range sensor setting", "ACC sensor: Start-up", "Adjust ACC sensor"],
     "adas_blind_spot_monitor": ["N/A"],
     "adas_360_camera": ["N/A"],
     "adas_windshield_camera": ["N/A"]
@@ -48,10 +48,10 @@
     "adas_windshield_camera": ["N/A"]
   },
   "Chrysler": {
-    "adas_front_radar": ["N/A"],
+    "adas_front_radar": ["ACC"],
     "adas_blind_spot_monitor": ["N/A"],
     "adas_360_camera": ["N/A"],
-    "adas_windshield_camera": ["N/A"]
+    "adas_windshield_camera": ["HALF"]
   },
   "Dodge": {
     "adas_front_radar": ["N/A"],

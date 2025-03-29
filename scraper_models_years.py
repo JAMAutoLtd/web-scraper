@@ -94,8 +94,7 @@ class ModelYearScraper:
 
     # List of manufacturers to scrape
     MANUFACTURERS = [
-        'ACURA', 'ALFA ROMEO', 'AUDI', 'BENTLEY', 'BMW',
-        'BUICK', 'CADILLAC', 'CHEVROLET', 'CHRYSLER', 'DODGE', 'FIAT',
+        'CHRYSLER', 'DODGE', 'FIAT',
         'FORD', 'GENESIS', 'GMC', 'HONDA', 'HYUNDAI', 'INFINITI', 'JAGUAR', 'JEEP',
         'KIA', 'LAMBORGHINI', 'LAND ROVER', 'LEXUS', 'LINCOLN', 'MASERATI',
         'MAZDA', 'MERCEDES-BENZ', 'MINI', 'MITSUBISHI', 'NISSAN',
@@ -141,9 +140,8 @@ class ModelYearScraper:
             with open("system_mappings.json", "r", encoding="utf-8") as f:
                 mappings = json.load(f)
             
-            # Debug output
-            for make, systems in mappings.items():
-                logger.info(f"Loaded mappings for {make}: {systems}")
+
+            logger.info(f"Loaded mappings")
             
             logger.info(f"Loaded system mappings for {len(mappings)} makes")
             self.system_mappings = mappings
@@ -1141,62 +1139,130 @@ class ModelYearScraper:
             mappings = self.system_mappings[make_key]
             logger.info(f"Found system mappings for {make_key}: {mappings}")
             
-            # Check what system options are available on the page
-            system_selector = "input[placeholder='System']"
-            system_element = await page.wait_for_selector(system_selector, timeout=2000)
-            if not system_element:
-                logger.warning("System field not found")
-                return adas_results
-            
-            # Click to open the dropdown and see what's available
-            await system_element.click()
-            logger.info("Clicked System dropdown to check available options")
-            await page.wait_for_timeout(1000)  # Wait for dropdown to open
-            
-            # Get all visible options
-            available_systems = await page.evaluate("""() => {
-                return Array.from(document.querySelectorAll('li'))
-                    .filter(el => el.offsetParent !== null) // Only visible elements
-                    .map(el => el.textContent.trim())
-                    .filter(text => text.length > 0); // Non-empty text
-            }""")
+            # For Audi/VW, check if system options are already visible
+            if manufacturer in {'AUDI', 'VOLKSWAGEN'}:
+                # Process each system type
+                for system_type, system_options in mappings.items():
+                    # For each system type after the first one, we need to re-click the field
+                    if system_type != list(mappings.keys())[0]:  # Not the first system type
+                        # Click the Engine/vehicle configuration field to reveal options
+                        engine_config_selector = "input[placeholder='Engine/vehicle configuration/System']"
+                        try:
+                            engine_config_element = await page.wait_for_selector(engine_config_selector, timeout=2000)
+                            if engine_config_element:
+                                logger.info("Re-clicking Engine/vehicle configuration field for next system")
+                                await engine_config_element.click()
+                                await page.wait_for_timeout(1000)  # Wait for dropdown to open
+                        except Exception as e:
+                            logger.error(f"Error re-clicking configuration field: {e}")
+                            continue
 
-            
-            # Close the dropdown by clicking elsewhere
-            await page.keyboard.press("Escape")
-            await page.wait_for_timeout(500)
-            
-            # If no available systems, exit early
-            if not available_systems:
-                logger.warning("No system options available in dropdown")
+                    # Now look for matching options for this system type
+                    for system_option in system_options:
+                        # Get current visible options
+                        available_systems = await page.evaluate("""() => {
+                            return Array.from(document.querySelectorAll('li'))
+                                .filter(el => el.offsetParent !== null)
+                                .map(el => el.textContent.trim())
+                                .filter(text => text.length > 0);
+                        }""")
+                        
+                        if system_option in available_systems:
+                            logger.info(f"Found matching option for {system_type}: {system_option}")
+                            
+                            # Click the visible option
+                            try:
+                                await page.evaluate(f"""(system) => {{
+                                    const elements = Array.from(document.querySelectorAll('li'));
+                                    const targetElement = elements.find(el => 
+                                        el.offsetParent !== null && 
+                                        el.textContent.trim() === system
+                                    );
+                                    if (targetElement) targetElement.click();
+                                }}""", system_option)
+                                
+                                logger.info(f"Successfully clicked system option: {system_option}")
+                                await page.wait_for_timeout(2000)  # Wait for any animations/changes
+                                
+                                # Get calibration type and CSC code
+                                calibration_type = await self.get_calibration_type(page)
+                                if calibration_type:
+                                    logger.info(f"Detected calibration type: {calibration_type}")
+                                    
+                                    # If static is in the calibration type, try to get CSC model
+                                    if "Static" in calibration_type:
+                                        # Look for CSC model in the page
+                                        csc_model = await self.get_csc_code(page)
+                                        if csc_model:
+                                            logger.info(f"Found CSC model: {csc_model}")
+                                            adas_results[system_type] = csc_model
+                                        else:
+                                            logger.info("No CSC model found, returning calibration type")
+                                            adas_results[system_type] = calibration_type
+                                    else:
+                                        # For dynamic, just return the calibration type
+                                        adas_results[system_type] = calibration_type
+                                    
+                                    # Break inner loop once we've found and processed a matching option
+                                    break
+                                else:
+                                    logger.warning(f"No calibration type found for system: {system_option}")
+                                    continue
+                                
+                            except Exception as e:
+                                logger.warning(f"Failed to select system: {system_option}")
+                                logger.debug(f"Error details: {str(e)}")
+                                await self.capture_debug_info(page, f"system_selection_error_{system_option.replace(' ', '_')}")
+                
                 return adas_results
             
-            # Map our system types to the actual available systems by matching names
-            available_system_mapping = {}
-            for system_type, system_options in mappings.items():
-                if system_options == ["N/A"]:
-                    continue
-                
-                # Create a list to store all matching options for this system type
-                matching_options = []
-                for option in system_options:
-                    for available_system in available_systems:
-                        # Check for exact match or partial match
-                        if option == available_system or option in available_system or available_system in option:
-                            matching_options.append(available_system)
-                            logger.info(f"Found matching option for {system_type}: {available_system}")
-                
-                if matching_options:
-                    available_system_mapping[system_type] = matching_options
-            
-            logger.info(f"Available system mappings: {available_system_mapping}")
-            
+            # For non-Audi/VW manufacturers, use the regular flow
             # Process each system type and try each of its possible options
-            for system_type, system_options in available_system_mapping.items():
+            for system_type, system_options in mappings.items():
                 try:
+                    # First check which options are actually available on the page
+                    await page.click("input[placeholder='System']")
+                    await page.wait_for_timeout(1000)
+                    
+                    # Get all visible options
+                    visible_options = await page.evaluate("""() => {
+                        return Array.from(document.querySelectorAll('li'))
+                            .filter(el => el.offsetParent !== null)
+                            .map(el => el.textContent.trim());
+                    }""")
+                    
+                    # Press escape to close the dropdown
+                    await page.keyboard.press("Escape")
+                    await page.wait_for_timeout(500)
+                    
+                    # Filter our options to only those that are visible on the page
+                    available_options = []
+                    for option in system_options:
+                        if option in visible_options:
+                            available_options.append(option)
+                            logger.info(f"Found available option for {system_type}: {option}")
+                    
+                    if not available_options:
+                        logger.warning(f"No available options found for {system_type}")
+                        continue
+                    
                     # Try each option for this system type
-                    for system_option in system_options:
+                    for option_index, system_option in enumerate(available_options):
                         logger.info(f"Processing system type: {system_type} with option: {system_option}")
+                        
+                        # Only re-click System field for manufacturers that close their dropdowns
+                        if manufacturer in {'BMW', 'AUDI', 'VOLKSWAGEN'} and option_index > 0:
+                            # Re-click System field to open dropdown again
+                            system_selector = "input[placeholder='System']"
+                            try:
+                                system_element = await page.wait_for_selector(system_selector, timeout=2000)
+                                if system_element:
+                                    logger.info("Re-clicking System field for next option")
+                                    await system_element.click()
+                                    await page.wait_for_timeout(1000)  # Wait for dropdown to open
+                            except Exception as e:
+                                logger.error(f"Error re-clicking System field: {e}")
+                                continue
                         
                         # Use our improved select_system method
                         if await self.select_system(page, system_option):
@@ -1234,15 +1300,15 @@ class ModelYearScraper:
                                     # For dynamic, just return the calibration type
                                     adas_results[system_type] = calibration_type
                                 
-                                # If we successfully processed this option, break the loop for this system type
+                                # Break the loop for this system type once we've found a valid result
                                 break
                             else:
                                 logger.warning(f"No calibration type found for system: {system_option}")
+                                continue
+                        else:
+                            logger.warning(f"Failed to select system: {system_option}")
                             continue
-                            
-                    logger.warning(f"Failed to select system: {system_option}")
-                    continue
-                    
+                        
                 except Exception as e:
                     logger.error(f"Error processing system option '{system_option}': {e}")
                     continue
@@ -1458,7 +1524,19 @@ class ModelYearScraper:
                                         # Update with ADAS data
                                         self.results[manufacturer]["models"][model][year_or_chassis].update(adas_results)
                                     
+                                    # If this model has a 'years' array but no direct year entries, add the ADAS data as direct entries
+                                    if "years" in self.results[manufacturer]["models"][model] and year_or_chassis not in self.results[manufacturer]["models"][model]:
+                                        # Check if the year exists in the years array
+                                        if year_or_chassis in self.results[manufacturer]["models"][model]["years"]:
+                                            # Add the ADAS data as a direct entry
+                                            self.results[manufacturer]["models"][model][year_or_chassis] = adas_results
+                                            logger.info(f"Added ADAS data as direct entry for {model} {year_or_chassis}")
+                                    
                                     logger.info(f"Stored ADAS results for {model} {year_or_chassis}")
+                                    
+                                    # Save after each YMM for incremental progress
+                                    self.save_results(manufacturer)
+                                    logger.info(f"Saved incremental results for {manufacturer} after {model} {year_or_chassis}")
                                     
                                 except Exception as year_err:
                                     logger.error(f"Error processing {year_or_chassis}: {year_err}")
@@ -1469,7 +1547,7 @@ class ModelYearScraper:
                             # Clean up model page
                             await model_page.close()
                             
-                            # Save interim results regularly
+                            # Save interim results regularly - we'll keep this as well for redundancy
                             if model_index % 5 == 0 or model_index == len(models) - 1:
                                 self.save_results(manufacturer)
                                 logger.info(f"Saved interim results for {manufacturer} after model {model}")
@@ -1714,9 +1792,93 @@ class ModelYearScraper:
                 
                 # Wait for year selection to take effect and system field to appear
                 await page.wait_for_timeout(2000)
-                
+
+                # Special handling for Audi and Volkswagen - need to select Engine/vehicle configuration first
+                if manufacturer in {'AUDI', 'VOLKSWAGEN'}:
+                    logger.info(f"Special handling for {manufacturer} - selecting Engine/vehicle configuration")
+                    
+                    # First click the Engine/vehicle configuration field to reveal options
+                    engine_config_selector = "input[placeholder='Engine/vehicle configuration/System']"
+                    try:
+                        engine_config_element = await page.wait_for_selector(engine_config_selector, timeout=2000)
+                        if engine_config_element:
+                            logger.info("Found Engine/vehicle configuration field")
+                            await engine_config_element.click()
+                            await page.wait_for_timeout(1000)  # Wait for dropdown to open
+                            
+                            # Now get all available vehicle types after the dropdown is open
+                            vehicle_types = await page.evaluate("""() => {
+                                const validTypes = [
+                                    'Saloon', 'Sedan', 'SUV', 'Coupe', 'Roadster',
+                                    'Citycarver', 'Allstreet', 'Convertible', 'Sportback'
+                                ];
+                                return Array.from(document.querySelectorAll('li'))
+                                    .filter(el => el.offsetParent !== null)
+                                    .map(el => el.textContent.trim())
+                                    .filter(text => 
+                                        validTypes.some(type => text.includes(type)) || // Check if text contains any valid type
+                                        text.match(/Saloon,.*door/) // Match Saloon with door specifications
+                                    );
+                            }""")
+                            
+                            if vehicle_types:
+                                logger.info(f"Found vehicle types: {vehicle_types}")
+                                # Select the first available vehicle type
+                                vehicle_type = vehicle_types[0]
+                                logger.info(f"Selecting vehicle type: {vehicle_type}")
+                                
+                                # Click the vehicle type
+                                vehicle_clicked = await page.evaluate("""(vehicleText) => {
+                                    const options = Array.from(document.querySelectorAll('li'));
+                                    const targetOption = options.find(el => 
+                                        el.textContent.trim() === vehicleText && 
+                                        el.offsetParent !== null
+                                    );
+                                    if (targetOption) {
+                                        targetOption.click();
+                                        return true;
+                                    }
+                                    return false;
+                                }""", vehicle_type)
+                                
+                                if vehicle_clicked:
+                                    logger.info("Successfully selected vehicle type")
+                                    await page.wait_for_timeout(2000)  # Wait for System options to appear
+                                else:
+                                    logger.warning("Failed to select vehicle type")
+                                    await self.capture_debug_info(page, f"{manufacturer}_{model}_{year_or_chassis}_vehicle_type_error")
+                                    return False
+                            else:
+                                logger.warning("No vehicle types found")
+                                await self.capture_debug_info(page, f"{manufacturer}_{model}_{year_or_chassis}_no_vehicle_types")
+                                return False
+                    except Exception as e:
+                        logger.error(f"Error handling Engine/vehicle configuration: {e}")
+                        await self.capture_debug_info(page, f"{manufacturer}_{model}_{year_or_chassis}_engine_config_error")
+                        return False
+            
                 # Now check if System field is visible
                 try:
+                    # For Audi/VW, check if options are already visible first
+                    if manufacturer in {'AUDI', 'VOLKSWAGEN'}:
+                        # Check if options are already visible
+                        options_visible = await page.evaluate("""() => {
+                            const options = Array.from(document.querySelectorAll('li'))
+                                .filter(el => el.offsetParent !== null)
+                                .map(el => el.textContent.trim());
+                            return options.some(text => 
+                                text.includes('ACC') || 
+                                text.includes('Lane') || 
+                                text.includes('Camera') || 
+                                text.includes('sensor')
+                            );
+                        }""")
+                        
+                        if options_visible:
+                            logger.info("System options are already visible for Audi/VW")
+                            return True
+                    
+                    # For other manufacturers or if Audi/VW options aren't visible yet
                     # Look for System input (similar to Product Type selector)
                     system_selector = "input[placeholder='System']"
                     system_element = await page.wait_for_selector(system_selector, timeout=2000)
@@ -1728,7 +1890,7 @@ class ModelYearScraper:
                         await self.capture_debug_info(page, f"{manufacturer}_{model}_{year_or_chassis}_no_system")
                         return False
                 except Exception as e:
-                    logger.error(f"Error waiting for System field: {e}")
+                    logger.error(f"First Error waiting for System field: {e}")
                     return False
                 
                 return clicked
@@ -1753,7 +1915,7 @@ class ModelYearScraper:
                         await self.capture_debug_info(page, f"{manufacturer}_{model}_{year_or_chassis}_no_system")
                         return False
                 except Exception as e:
-                    logger.error(f"Error waiting for System field: {e}")
+                    logger.error(f"Second Error waiting for System field: {e}")
                     return False
             else:
                 logger.error(f"Failed to select {year_or_chassis}")
@@ -1769,18 +1931,6 @@ class ModelYearScraper:
         try:
             logger.info(f"Selecting system: {system_name}")
             
-            # Click the System field to open the dropdown
-            system_selector = "input[placeholder='System']"
-            system_element = await page.wait_for_selector(system_selector, timeout=2000)
-            if not system_element:
-                logger.warning("System field not found")
-                return False
-            
-            # Click to open the dropdown
-            await system_element.click()
-            logger.info("Clicked System dropdown")
-            await page.wait_for_timeout(1000)  # Wait for dropdown to open
-
             # For ADAS systems, use precision targeting method first
             result = await self._try_select_specific_system(page, system_name)
             if result:
@@ -1791,7 +1941,8 @@ class ModelYearScraper:
             # If precision targeting failed, try one backup method with direct selector
             try:
                 logger.info(f"Precision targeting failed, trying direct selector: li:text-is('{system_name}')")
-                await page.click(f"li:text-is('{system_name}')")
+                # Use a shorter timeout here - 5 seconds instead of 30
+                await page.click(f"li:text-is('{system_name}')", timeout=5000)
                 logger.info(f"Direct selector successfully selected {system_name}")
                 await page.wait_for_timeout(2000)
                 return True
